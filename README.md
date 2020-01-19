@@ -2,7 +2,6 @@
 
 # See TODO.txt for goals
 
-# See SETUP.txt for some background
 
 This is the GrazeRSS source repository. 
 
