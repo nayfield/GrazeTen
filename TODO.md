@@ -54,3 +54,8 @@ Repeat the walkthrough on the Q device
 
 4. Fix the crash behavior on 'share link' or 'open in browser'
 
+## Hints
+
+* you can remove support for ads if required to do #1
+* Task #2 is around oauth - it may need the AppAuth library, or opening in chrome etc
+* Task #3 - see [This Article](https://android-developers.googleblog.com/2012/01/say-goodbye-to-menu-button.html)
