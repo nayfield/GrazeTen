@@ -38,8 +38,7 @@ Repeat the walkthrough on the Q device
 
 ## Tasks to complete
 
-**ALL** tasks are to be fulfilled by github pull requests.  
-
+* **ALL** tasks are to be fulfilled by github pull requests.  
   * At a minimum you will need to fork the repo, commit and push changes to your fork, and create pull request via the github user interface.  No other contributions will be looked at.
 
 
