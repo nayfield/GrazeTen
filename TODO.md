@@ -1,7 +1,7 @@
 
 ## Background
 
-This is nayfield/GrazeRSS inmported into a modern Android Studio.
+This is [GrazeRSS](https://github.com/nayfield/GrazeRSS) inmported into a modern Android Studio.
 
 GrazeRSS is very old - targetSdkVersion 9.
 
@@ -38,7 +38,7 @@ Repeat the walkthrough on the Q device
 
 ## Tasks to complete
 
-*ALL* tasks are to be fulfilled by github pull requests.  At a minimum you will need to fork the repo, commit and push changes to your fork, and create pull request via the github user interface.  No other contributions will be looked at.
+**ALL** tasks are to be fulfilled by github pull requests.  At a minimum you will need to fork the repo, commit and push changes to your fork, and create pull request via the github user interface.  No other contributions will be looked at.
 
 
 1. Update target SDK to API 29.  Yes this will require some code changes.  Do not just delete code, make the code work with the new SDK.
