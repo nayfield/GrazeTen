@@ -1,13 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 10
+    compileSdkVersion 29
     buildToolsVersion "29.0.2"
+    useLibrary 'org.apache.http.legacy'
 
     defaultConfig {
         applicationId "com.grazerss"
-        minSdkVersion 7
-        targetSdkVersion 9
+        minSdkVersion 16
+        targetSdkVersion 29
     }
 
     buildTypes {
@@ -19,11 +20,10 @@ android {
 }
 
 dependencies {
-    compile 'com.google.code.gson:gson:2.2.3'
-    compile files('libs/Flurry_3.2.1.jar')
-    compile files('libs/GoogleAdView.jar')
-    compile files('libs/okhttp-2.1.0-RC1.jar')
-    compile files('libs/okhttp-urlconnection-2.0.0-RC1.jar')
-    compile files('libs/okio-1.0.1.jar')
-    compile files('libs/retrofit-1.7.1.jar')
+    implementation 'com.google.code.gson:gson:2.2.3'
+    implementation 'com.flurry.android:analytics:6.2.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.0.0'
+    implementation 'com.squareup.okio:okio:1.0.1'
+    implementation 'com.squareup.retrofit:retrofit:1.7.1'
+    implementation files('libs/GoogleAdView.jar')
 }
