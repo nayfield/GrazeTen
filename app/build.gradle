@@ -7,7 +7,7 @@ android {
 
     defaultConfig {
         applicationId "com.grazerss"
-        minSdkVersion 16
+        minSdkVersion 21
         targetSdkVersion 29
     }
 
@@ -20,6 +20,7 @@ android {
 }
 
 dependencies {
+    implementation 'com.android.support:appcompat-v7:22.1.0'
     implementation 'com.google.code.gson:gson:2.2.3'
     implementation 'com.flurry.android:analytics:6.2.0'
     implementation 'com.squareup.okhttp3:okhttp:3.0.0'
