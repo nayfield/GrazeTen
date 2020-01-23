@@ -1,15 +1,5 @@
 package com.grazerss.activities;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.lang.reflect.Method;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
@@ -45,6 +35,7 @@ import android.view.animation.Animation.AnimationListener;
 import android.view.animation.ScaleAnimation;
 import android.view.animation.TranslateAnimation;
 import android.webkit.WebBackForwardList;
+import android.webkit.WebChromeClient;
 import android.webkit.WebHistoryItem;
 import android.webkit.WebSettings;
 import android.webkit.WebSettings.LayoutAlgorithm;
@@ -76,6 +67,16 @@ import com.grazerss.util.U;
 import com.grazerss.util.WebViewHelper6;
 import com.grazerss.util.WebViewHelper8;
 import com.grazerss.widget.RelativeLayout;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.lang.reflect.Method;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class ShowArticleActivity extends Activity implements IEntryModelUpdateListener, View.OnClickListener
 {
@@ -392,14 +393,10 @@ public class ShowArticleActivity extends Activity implements IEntryModelUpdateLi
      * longer the default // for // Froyo } catch (Exception e) { // never mind }
      */
     wv.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
-
     defaultScale = wv.getScale(); // saved for later use
 
-    wv.setOnLongClickListener(new View.OnLongClickListener()
-    {
-
-      public boolean onLongClick(View v)
-      {
+    wv.setOnLongClickListener(new View.OnLongClickListener() {
+      public boolean onLongClick(View v) {
         lastLongClickTarget = v;
         return false;
       }
@@ -412,22 +409,18 @@ public class ShowArticleActivity extends Activity implements IEntryModelUpdateLi
     // webView.getSettings().getUserAgentString());
 
     webSettings.setBuiltInZoomControls(getEntryManager().areHoveringZoomControlsEnabled());
-
-    if (SDKVersionUtil.getVersion() >= 8)
-    {
-      WebViewHelper8.setupWebView(entryManager, wv);
+    if (SDKVersionUtil.getVersion() >= 8) {
+        WebViewHelper8.setupWebView(entryManager, wv);
+        wv.setWebChromeClient(new WebChromeClient());
     }
-    else
-    {
-      webSettings.setPluginsEnabled(true); // Enables YouTube
+    else {
+        webSettings.setPluginState(WebSettings.PluginState.ON);
     }
 
     webSettings.setTextSize(TextSize.valueOf(getEntryManager().getDefaultTextSize()));
     webSettings.setLoadWithOverviewMode(false);
     webSettings.setUseWideViewPort(true);
-
     // LATER webSettings.setLightTouchEnabled(true);
-
   }
 
   @Override
@@ -780,8 +773,8 @@ public class ShowArticleActivity extends Activity implements IEntryModelUpdateLi
         webView.scrollTo(0, 0);
       }
 
-      if (webView.getSettings() != null)
-      {
+      if (webView.getSettings() != null) {
+        // NOTE: If Javascript is disabled here Youtube videos will not be shown or played embedded in the Webview
         webView.getSettings().setJavaScriptEnabled(selectedEntry.isJavaScriptEnabled());
       }
 
@@ -1305,8 +1298,8 @@ public class ShowArticleActivity extends Activity implements IEntryModelUpdateLi
 
     try
     {
-      Method m = webView.getClass().getMethod("onPause", null);
-      m.invoke(webView, new Object[] {});
+      Method m = webView.getClass().getMethod("onPause");
+      m.invoke(webView);
     }
     catch (Exception e)
     {
@@ -1339,8 +1332,8 @@ public class ShowArticleActivity extends Activity implements IEntryModelUpdateLi
     webView.resumeTimers();
     try
     {
-      Method m = webView.getClass().getMethod("onResume", null);
-      m.invoke(webView, new Object[] {});
+      Method m = webView.getClass().getMethod("onResume");
+      m.invoke(webView);
     }
     catch (Exception e)
     {

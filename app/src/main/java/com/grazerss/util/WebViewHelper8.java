@@ -1,8 +1,8 @@
 package com.grazerss.util;
 
 import android.webkit.WebSettings;
-import android.webkit.WebView;
 import android.webkit.WebSettings.PluginState;
+import android.webkit.WebView;
 
 import com.grazerss.EntryManager;
 import com.grazerss.PL;
@@ -15,6 +15,7 @@ public class WebViewHelper8
     String state = entryManager.getPlugins();
     settings.setPluginState(PluginState.valueOf(state));
     PL.log("SetupWebView. Plugin State=" + settings.getPluginState(), webView.getContext());
-
+    settings.setJavaScriptEnabled(true);
+    settings.setAllowFileAccess(true);
   }
 }

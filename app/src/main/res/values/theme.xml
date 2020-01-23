@@ -74,5 +74,27 @@
       <item name="android:layout_weight">0</item>
       <item name="android:background">@drawable/title_button</item>
     </style>
+
+    <style name="CustomToolBar" parent="ThemeOverlay.AppCompat.Light">
+<!--        <item name="colorPrimary">@drawable/list_header_background</item>-->
+<!--        <item name="colorPrimaryDark">@drawable/list_header_background_dark</item>-->
+        <item name="colorAccent">@android:color/white</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:editTextColor">@android:color/white</item>
+        <item name="android:textColorHint">@android:color/white</item>
+        <item name="colorControlNormal">@android:color/white</item> <!-- sets the color for the back arrow -->
+        <item name="android:actionOverflowButtonStyle">@style/OverflowButtonStyle</item> <!-- sets the style for the overflow button -->
+    </style>
+    <style name="ToolbarTitleAppearance" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+    <style name="ToolbarSubtitleAppearance" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Subtitle">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+    <style name="OverflowButtonStyle" parent="@style/Widget.AppCompat.ActionButton.Overflow">
+        <item name="android:tint">@android:color/white</item>
+    </style>
     
 </resources>

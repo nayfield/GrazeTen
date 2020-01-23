@@ -1,7 +1,5 @@
 package com.grazerss;
 
-import java.util.Date;
-
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -18,6 +16,8 @@ import com.grazerss.jobs.Job;
 import com.grazerss.jobs.ModelUpdateResult;
 import com.grazerss.locale.FireReceiver;
 import com.grazerss.util.U;
+
+import java.util.Date;
 
 public class NewsRobNotificationManager implements IEntryModelUpdateListener
 {
@@ -61,10 +61,19 @@ public class NewsRobNotificationManager implements IEntryModelUpdateListener
     Intent i = new Intent(Intent.ACTION_VIEW, uri);
     i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-    Notification n = new Notification(R.drawable.gen_auto_notification_icon, "GrazeRSS has been updated", new Date().getTime());
-    n.setLatestEventInfo(context, "GrazeRSS has been updated", "Tap to open release notes.", PendingIntent.getActivity(context, 0, i, 0));
-    n.flags |= Notification.FLAG_AUTO_CANCEL;
+//    Notification n = new Notification(R.drawable.gen_auto_notification_icon, "GrazeRSS has been updated", new Date().getTime());
+//    n.setLatestEventInfo(context, "GrazeRSS has been updated", "Tap to open release notes.", PendingIntent.getActivity(context, 0, i, 0));
+//    n.flags |= Notification.FLAG_AUTO_CANCEL;
 
+    Notification.Builder builder = new Notification.Builder(context)
+      .setSmallIcon(R.drawable.gen_auto_notification_icon)
+      .setTicker("GrazeRSS has been updated")
+      .setWhen(new Date().getTime())
+      .setContentTitle("GrazeRSS has been updated")
+      .setContentText("Tap to open release notes.")
+      .setContentIntent(PendingIntent.getActivity(context, 0, i, 0));
+    Notification n = builder.build();
+    n.flags |= Notification.FLAG_AUTO_CANCEL;
     nm.notify(9292, n);
   }
 
@@ -79,33 +88,55 @@ public class NewsRobNotificationManager implements IEntryModelUpdateListener
       intent.putExtra(EntryManager.EXTRA_CAPTCHA_URL, captchaUrl);
     }
     PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
-    Notification n = new Notification(R.drawable.gen_auto_notification_sync_problem, U.t(context, R.string.login_to_google_needed),
-        new Date().getTime());
-    // Notification n = new Notification(R.drawable.sync_problem,
-    // U.t(context,
-    // R.string.login_to_google_needed), new Date().getTime());
-    n.setLatestEventInfo(context, U.t(context, R.string.app_name), U.t(context, R.string.login_to_google_needed), pendingIntent); // LATER
-    // i18n
-    n.flags |= Notification.FLAG_AUTO_CANCEL;
+//    Notification n = new Notification(R.drawable.gen_auto_notification_sync_problem, U.t(context, R.string.login_to_google_needed),
+//        new Date().getTime());
+//    // Notification n = new Notification(R.drawable.sync_problem,
+//    // U.t(context,
+//    // R.string.login_to_google_needed), new Date().getTime());
+//    n.setLatestEventInfo(context, U.t(context, R.string.app_name), U.t(context, R.string.login_to_google_needed), pendingIntent); // LATER
+//    // i18n
+//    n.flags |= Notification.FLAG_AUTO_CANCEL;
 
+    Notification.Builder builder = new Notification.Builder(context)
+        .setSmallIcon(R.drawable.gen_auto_notification_sync_problem)
+        .setTicker(U.t(context, R.string.login_to_google_needed))
+        .setWhen(System.currentTimeMillis())
+        .setContentTitle(U.t(context, R.string.app_name))
+        .setContentText(U.t(context, R.string.login_to_google_needed))
+        .setContentIntent(pendingIntent);
+    Notification n = builder.build();
+    n.flags |= Notification.FLAG_AUTO_CANCEL;
     return n;
   }
 
   private Notification createSynchronizationRunningNotification(boolean fastSyncOnly)
   {
 
-    Notification n = new Notification(R.drawable.gen_auto_notification_icon, context.getResources().getString(
-        fastSyncOnly ? R.string.fast_synchronization_running_notification_title : R.string.synchronization_running_notification_title),
-        new Date().getTime());
+//    Notification n = new Notification(R.drawable.gen_auto_notification_icon, context.getResources().getString(
+//        fastSyncOnly ? R.string.fast_synchronization_running_notification_title : R.string.synchronization_running_notification_title),
+//        new Date().getTime());
     Intent intent = new Intent(context, DashboardListActivity.class);
     intent.putExtra("showProgress", true);
+//
+//    n.setLatestEventInfo(context, U.t(context, fastSyncOnly ? R.string.fast_synchronization_running_notification_title
+//        : R.string.synchronization_running_notification_title), U.t(context,
+//        fastSyncOnly ? R.string.fast_synchronization_running_notification_summary : R.string.synchronization_running_notification_summary),
+//        PendingIntent.getActivity(context, 0, intent, 0));
+//    n.flags = Notification.FLAG_ONGOING_EVENT;
 
-    n.setLatestEventInfo(context, U.t(context, fastSyncOnly ? R.string.fast_synchronization_running_notification_title
-        : R.string.synchronization_running_notification_title), U.t(context,
-        fastSyncOnly ? R.string.fast_synchronization_running_notification_summary : R.string.synchronization_running_notification_summary),
-        PendingIntent.getActivity(context, 0, intent, 0));
+    Notification.Builder builder = new Notification.Builder(context)
+        .setSmallIcon(R.drawable.gen_auto_notification_icon)
+        .setTicker(context.getResources().getString(
+            fastSyncOnly ? R.string.fast_synchronization_running_notification_title
+                         : R.string.synchronization_running_notification_title))
+        .setWhen(System.currentTimeMillis())
+        .setContentTitle(U.t(context, fastSyncOnly ? R.string.fast_synchronization_running_notification_title
+                                                   : R.string.synchronization_running_notification_title))
+        .setContentText(U.t(context, fastSyncOnly ? R.string.fast_synchronization_running_notification_summary
+                                                  : R.string.synchronization_running_notification_summary))
+        .setContentIntent(PendingIntent.getActivity(context, 0, intent, 0));
+    Notification n = builder.build();
     n.flags = Notification.FLAG_ONGOING_EVENT;
-
     return n;
   }
 
@@ -175,20 +206,26 @@ public class NewsRobNotificationManager implements IEntryModelUpdateListener
 
   public void createSyncSpaceExceededProblemNotification(int reservedSpaceInMB)
   {
-
     Intent intent = new Intent(context, DashboardListActivity.class);
     PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
-
     String message = "Not enough space left to download articles.\n<" + reservedSpaceInMB + " MB free.";
-    Notification n = new Notification(R.drawable.gen_auto_notification_sync_problem, message, new Date().getTime());
-    // Notification n = new Notification(R.drawable.sync_problem,
-    // U.t(context,
-    // R.string.login_to_google_needed), new Date().getTime());
-    n.setLatestEventInfo(context, U.t(context, R.string.app_name), message, pendingIntent);
+//    Notification n = new Notification(R.drawable.gen_auto_notification_sync_problem, message, new Date().getTime());
+////     Notification n = new Notification(R.drawable.sync_problem,
+////     U.t(context,
+////     R.string.login_to_google_needed), new Date().getTime());
+//    n.setLatestEventInfo(context, U.t(context, R.string.app_name), message, pendingIntent);
+//    n.flags |= Notification.FLAG_AUTO_CANCEL;
+
+    Notification.Builder builder = new Notification.Builder(context)
+        .setSmallIcon(R.drawable.gen_auto_notification_sync_problem)
+        .setTicker(message)
+        .setWhen(System.currentTimeMillis())
+        .setContentTitle(U.t(context, R.string.app_name))
+        .setContentText(message)
+        .setContentIntent(pendingIntent);
+    Notification n = builder.build();
     n.flags |= Notification.FLAG_AUTO_CANCEL;
-
     nm.notify(NOTIFICATION_SYNCHRONIZATION_STOPPED_WITH_ERROR, n);
-
   }
 
   @Override
@@ -230,19 +267,15 @@ public class NewsRobNotificationManager implements IEntryModelUpdateListener
   {
     cancelNewArticlesNotification();
 
-    if (noOfNewArticles < 1)
-    {
+    if (noOfNewArticles < 1) {
       return;
     }
-
     SharedPreferences prefs = entryManager.getSharedPreferences();
-    if (!prefs.getBoolean("settings_notifications_enabled", true))
-    {
+    if (!prefs.getBoolean("settings_notifications_enabled", true)) {
       return;
     }
 
     Intent intent = new Intent(context, ArticleListActivity.class);
-
     DBQuery dbq = new DBQuery(entryManager, null, null);
     dbq.setStartDate(startDate);
     dbq.setShouldHideReadItemsWithoutUpdatingThePreference(true);
@@ -250,39 +283,40 @@ public class NewsRobNotificationManager implements IEntryModelUpdateListener
     UIHelper.addExtrasFromDBQuery(intent, dbq);
 
     PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
-    Notification n = new Notification(R.drawable.gen_auto_notification_icon,
-        noOfNewArticles + " new " + U.pluralize(noOfNewArticles, "article"), System.currentTimeMillis());
-    n.setLatestEventInfo(context, "New articles!",
+//    Notification n = new Notification(R.drawable.gen_auto_notification_icon,
+//        noOfNewArticles + " new " + U.pluralize(noOfNewArticles, "article"), System.currentTimeMillis());
+//    n.setLatestEventInfo(context, "New articles!",
+//    noOfNewArticles + " new " + U.pluralize(noOfNewArticles, "article") + " in monitored feeds.", pendingIntent);
 
-    noOfNewArticles + " new " + U.pluralize(noOfNewArticles, "article") + " in monitored feeds.", pendingIntent);
+    Notification.Builder builder = new Notification.Builder(context)
+      .setSmallIcon(R.drawable.gen_auto_notification_icon)
+      .setTicker(noOfNewArticles + " new " + U.pluralize(noOfNewArticles, "article"))
+      .setWhen(System.currentTimeMillis())
+      .setContentTitle("New articles!")
+      .setContentText(noOfNewArticles + " new " + U.pluralize(noOfNewArticles, "article") + " in monitored feeds.")
+      .setContentIntent(pendingIntent);
+    Notification n = builder.build();
     n.number = noOfNewArticles;
     n.flags |= Notification.FLAG_AUTO_CANCEL;
 
-    if (prefs.getBoolean("settings_notify_with_led_enabled", true))
-    {
-
+    if (prefs.getBoolean("settings_notify_with_led_enabled", true)) {
       n.ledOnMS = 100;
       n.ledOffMS = 3000;
       n.ledARGB = 0xff0000ff;
-
       n.flags |= Notification.FLAG_SHOW_LIGHTS;
     }
 
     // if (prefs.getBoolean("settings_notify_with_sound_enabled", false))
     // n.defaults |= Notification.DEFAULT_SOUND;
 
-    if (prefs.getString("settings_notify_with_sound_url", "").length() != 0)
-    {
+    if (prefs.getString("settings_notify_with_sound_url", "").length() != 0) {
       n.sound = Uri.parse(prefs.getString("settings_notify_with_sound_url", ""));
     }
-
-    if (prefs.getBoolean("settings_notify_with_vibration_enabled", true))
-    {
+    if (prefs.getBoolean("settings_notify_with_vibration_enabled", true)) {
       n.vibrate = new long[] { 0, 100, 1000, 100, 1000, 100 };
     }
 
     nm.notify(NOTIFICATION_NEW_ARTICLES, n);
-
   }
 
   public void sendSynchronizationProblemNotification(boolean loginExpired)

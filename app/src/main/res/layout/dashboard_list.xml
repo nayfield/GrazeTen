@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
 
     android:id="@+id/ad_parent"
 
@@ -59,13 +59,27 @@
         layout="@layout/control_panel" />
     -->
 
-    <ViewStub
-        android:id="@+id/control_panel_stub"
-        android:inflatedId="@+id/control_panel"
+<!--    <android.support.v7.widget.Toolbar-->
+<!--        android:id="@+id/activity_actionbar"-->
+<!--        android:theme="@style/CustomToolBar"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="?actionBarSize"-->
+<!--        app:titleTextAppearance="@style/ToolbarTitleAppearance"-->
+<!--        app:subtitleTextAppearance="@style/ToolbarSubtitleAppearance"/>-->
 
-        android:layout="@layout/control_panel"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
+    <android.widget.Toolbar
+        android:id="@+id/activity_actionbar"
+        android:theme="@style/CustomToolBar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"/>
+
+<!--    <ViewStub-->
+<!--        android:id="@+id/control_panel_stub"-->
+<!--        android:inflatedId="@+id/control_panel"-->
+
+<!--        android:layout="@layout/control_panel"-->
+<!--        android:layout_width="fill_parent"-->
+<!--        android:layout_height="wrap_content" />-->
     <!--
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

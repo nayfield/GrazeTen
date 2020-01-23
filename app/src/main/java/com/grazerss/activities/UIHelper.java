@@ -1,8 +1,5 @@
 package com.grazerss.activities;
 
-import java.lang.reflect.Method;
-import java.util.regex.Pattern;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -18,6 +15,9 @@ import com.grazerss.EntryManager;
 import com.grazerss.Feed;
 import com.grazerss.NewsRob;
 import com.grazerss.PL;
+
+import java.lang.reflect.Method;
+import java.util.regex.Pattern;
 
 /**
  * @SuppressWarnings("PMD.NullAssignments")
@@ -229,8 +229,8 @@ public class UIHelper
     try
     {
       PL.log("Found webview" + webView + " " + methodName, webView.getContext());
-      Method m = webView.getClass().getMethod(methodName, null);
-      m.invoke(webView, new Object[] {});
+      Method m = webView.getClass().getMethod(methodName);
+      m.invoke(webView);
     }
     catch (Exception e)
     {
