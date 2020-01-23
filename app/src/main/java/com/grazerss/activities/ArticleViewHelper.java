@@ -51,9 +51,7 @@ class ArticleViewHelper
   static boolean articleActionSelected(final Activity owningActivity, final MenuItem item, final EntryManager entryManager,
       final Entry selectedEntry)
   {
-
-    if (selectedEntry == null)
-    {
+    if (selectedEntry == null) {
       return false;
     }
 
@@ -157,65 +155,54 @@ class ArticleViewHelper
   static void createArticleMenu(final Menu menu, final Activity owningActivity, final Entry selectedEntry)
   {
     final EntryManager entryManager = EntryManager.getInstance(owningActivity);
-
     final boolean isArticleContextMenu = menu instanceof ContextMenu;
-    if (isArticleContextMenu)
-    {
+    if (isArticleContextMenu) {
       ((ContextMenu) menu).setHeaderTitle("Article");
     }
 
     final boolean alternateHRefAvailable = ((selectedEntry != null) && (selectedEntry.getAlternateHRef() != null));
-
-    if (selectedEntry == null)
-    {
+    if (selectedEntry == null) {
       Log.e(TAG, "Oops. SelectedEntry was null.");
       return;
     }
 
-    if (entryManager.isGoogleTv() && ((selectedEntry.getReadState() == ReadState.READ) || (selectedEntry.getReadState() == ReadState.UNREAD)))
-    {
+    if (entryManager.isGoogleTv() && ((selectedEntry.getReadState() == ReadState.READ) || (selectedEntry.getReadState() == ReadState.UNREAD))) {
       menu.add(0, MENU_ITEM_PIN_ARTICLE_ID, 1, "Pin").setIcon(android.R.drawable.btn_star);
     }
-
-    if (selectedEntry.getReadState() == ReadState.READ)
-    {
+    if (selectedEntry.getReadState() == ReadState.READ) {
       menu.add(0, MENU_ITEM_MARK_ENTRY_UNREAD_ID, 2, R.string.menu_mark_as_unread).setIcon(android.R.drawable.checkbox_on_background);
     }
-    else
-    {
+    else {
       menu.add(0, MENU_ITEM_MARK_ENTRY_READ_ID, 2, R.string.menu_mark_as_read).setIcon(android.R.drawable.checkbox_on_background);
     }
 
-    if (isArticleContextMenu)
-    {
-      if (selectedEntry.isStarred())
-      {
+    if (isArticleContextMenu) {
+      if (selectedEntry.isStarred()) {
         menu.add(0, MENU_ITEM_UNSTAR_ID, 3, R.string.menu_item_unstar).setIcon(android.R.drawable.btn_star_big_off);
       }
-      else
-      {
+      else {
         menu.add(0, MENU_ITEM_STAR_ID, 3, R.string.menu_item_star).setIcon(android.R.drawable.btn_star_big_off);
       }
-
     }
 
     Uri uri = null;
-    if (alternateHRefAvailable)
-    {
+    if (alternateHRefAvailable) {
       uri = Uri.parse(selectedEntry.getAlternateHRef());
     }
 
+    Intent browserIntent = new Intent(Intent.ACTION_VIEW, uri);
+    browserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     menu.add(0, MENU_ITEM_SHOW_IN_BROWSER_ID, 5, R.string.menu_show_in_browser)
-        .setTitleCondensed(U.t(owningActivity, R.string.menu_show_in_browser_condensed)).setIntent(new Intent(Intent.ACTION_VIEW, uri))
+        .setTitleCondensed(U.t(owningActivity, R.string.menu_show_in_browser_condensed))
+        .setIntent(browserIntent)
         .setIcon(android.R.drawable.ic_menu_view).setEnabled(alternateHRefAvailable);
-
     menu.add(0, MENU_ITEM_SHARE_LINK_ID, 6, R.string.menu_item_share_link)
-        .setIntent(Intent.createChooser(createShareLinkSendIntent(selectedEntry), "Share Link")).setIcon(android.R.drawable.ic_menu_share)
+        .setIntent(createShareLinkSendIntent(selectedEntry))
+        .setIcon(android.R.drawable.ic_menu_share)
         .setEnabled(alternateHRefAvailable);
 
-    if (selectedEntry.getContent() != null)
-    {
-      System.out.println("selectedEntry.getContent().length() > 100=" + (selectedEntry.getContent().length() > 100));
+    if (selectedEntry.getContent() != null) {
+      Log.d("ArticleViewHelper", "selectedEntry.getContent().length() > 100=" + (selectedEntry.getContent().length() > 100));
     }
 
     // menu.add(0, MENU_ITEM_SHARE_ARTICLE_ID, 7, "Share Article")
@@ -224,14 +211,11 @@ class ArticleViewHelper
 
     menu.add(0, MENU_ITEM_REFRESH_CONTENT_ID, 13, "Refresh Content").setIcon(android.R.drawable.ic_menu_close_clear_cancel)
         .setEnabled((selectedEntry.getDownloaded() != Entry.STATE_NOT_DOWNLOADED) && entryManager.getStorageAdapter().canWrite());
-
     menu.add(0, MENU_ITEM_MANAGE_FEED_ID, 14, R.string.menu_item_manage_feed).setIcon(android.R.drawable.ic_menu_manage)
         .setEnabled(selectedEntry.getFeedId() != 0l);
-
     menu.add(0, MENU_ITEM_SHOW_ARTICLE_INFO_ID, 15, R.string.menu_item_show_article_info);
 
-    if ("1".equals(NewsRob.getDebugProperties(owningActivity).getProperty("enableBoom", "0")))
-    {
+    if ("1".equals(NewsRob.getDebugProperties(owningActivity).getProperty("enableBoom", "0"))) {
       menu.add(0, MENU_ITEM_BOOM_ID, 21, "Boom!");
       //
       // if (entryManager.canNewsRobProBeBought()) {
@@ -242,39 +226,31 @@ class ArticleViewHelper
       // "Buy NewsRob Pro!").setIntent(viewIntent);
       // }
     }
-
   }
 
   private static Intent createShareArticleSendIntent(final Entry selectedEntry)
   {
-
     Intent shareArticleSendIntent = new Intent(Intent.ACTION_SEND);
-    shareArticleSendIntent = new Intent(Intent.ACTION_SEND);
     // sendIntent.setType("message/rfc822");
     shareArticleSendIntent.setType("text/html");
     shareArticleSendIntent.putExtra(Intent.EXTRA_SUBJECT, selectedEntry.getTitle());
 
     final boolean alternateHRefAvailable = ((selectedEntry != null) && (selectedEntry.getAlternateHRef() != null));
     Uri uri = null;
-    if (alternateHRefAvailable)
-    {
+    if (alternateHRefAvailable) {
       uri = Uri.parse(selectedEntry.getAlternateHRef());
     }
 
     StringBuilder message = new StringBuilder();
     message.append("<html><body><div>Hi.\n\nI want to share this article with you: ");
-    if (uri != null)
-    {
-      message.append(String.valueOf(uri));
+    if (uri != null) {
+      message.append(uri);
     }
     message.append("\n\n");
-
     message.append(selectedEntry.getContent());
     message.append("\n\nSend via <b>GrazeRSS</b>\n</div></body></html>");
-
     message = new StringBuilder(
         "<html><body><p>Hello<img src=\'http://www.spiegel.de/static/sys/v9/spiegelonline_logo.png\'/> world.</body></html>");
-
     shareArticleSendIntent.putExtra(Intent.EXTRA_TEXT, Html.fromHtml(String.valueOf(message)));
 
     return shareArticleSendIntent;
@@ -282,12 +258,9 @@ class ArticleViewHelper
 
   private static Intent createShareLinkSendIntent(final Entry selectedEntry)
   {
-
     final boolean alternateHRefAvailable = ((selectedEntry != null) && (selectedEntry.getAlternateHRef() != null));
-
     Uri uri = null;
-    if (alternateHRefAvailable)
-    {
+    if (alternateHRefAvailable) {
       uri = Uri.parse(selectedEntry.getAlternateHRef());
     }
 
@@ -296,8 +269,10 @@ class ArticleViewHelper
     sendIntent.setType("text/plain");
     sendIntent.putExtra(Intent.EXTRA_SUBJECT, selectedEntry.getTitle());
     sendIntent.putExtra(Intent.EXTRA_TEXT, String.valueOf(uri));
-
-    return sendIntent;
+    sendIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+    sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+    return Intent.createChooser(sendIntent, "Share Link")
+        .addFlags((Intent.FLAG_ACTIVITY_NEW_TASK));
   }
 
   static void populateEntryView(final View view, final Entry entry, final EntryManager entryManager, final UIHelper uiHelper)
