@@ -59,14 +59,6 @@
         layout="@layout/control_panel" />
     -->
 
-<!--    <android.support.v7.widget.Toolbar-->
-<!--        android:id="@+id/activity_actionbar"-->
-<!--        android:theme="@style/CustomToolBar"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="?actionBarSize"-->
-<!--        app:titleTextAppearance="@style/ToolbarTitleAppearance"-->
-<!--        app:subtitleTextAppearance="@style/ToolbarSubtitleAppearance"/>-->
-
     <android.widget.Toolbar
         android:id="@+id/activity_actionbar"
         android:theme="@style/CustomToolBar"

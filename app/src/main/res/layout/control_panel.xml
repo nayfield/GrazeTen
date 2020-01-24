@@ -114,9 +114,5 @@
 
 	</LinearLayout>
 
-	<!--
-		<include layout="@layout/in_progress_notification" />
-	-->
-
 </LinearLayout>
 		
