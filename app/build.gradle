@@ -6,7 +6,7 @@ android {
     useLibrary 'org.apache.http.legacy'
 
     defaultConfig {
-        applicationId "com.grazerss"
+        applicationId "com.grazeten"
         minSdkVersion 21
         targetSdkVersion 29
     }
