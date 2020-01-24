@@ -154,8 +154,7 @@ public class NewsRobNotificationManager implements IEntryModelUpdateListener
     final RemoteViews contentView = new RemoteViews(context.getPackageName(), R.layout.in_progress_notification);
     n.contentView = contentView;
 
-    Intent cancelSyncIntent = new Intent("com.grazeten.CANCEL_SYNC");
-    // Intent cancelSyncIntent = new Intent();
+    Intent cancelSyncIntent = new Intent("com.grazerss.CANCEL_SYNC");
     cancelSyncIntent.setClass(context, FireReceiver.class);
     PendingIntent pendingCancelSyncIntent = PendingIntent.getBroadcast(context, 0, cancelSyncIntent, 0);
     contentView.setOnClickPendingIntent(R.id.cancel_sync, pendingCancelSyncIntent);

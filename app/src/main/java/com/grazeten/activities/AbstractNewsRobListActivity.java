@@ -1359,10 +1359,17 @@ public abstract class AbstractNewsRobListActivity extends ListActivity
       return;
     }
 
-    View cancelButton = findViewById(R.id.cancel_sync);
-    if (cancelButton != null)
-    {
-      cancelButton.setEnabled(entryManager.isModelCurrentlyUpdated() && !entryManager.isCancelRequested());
+    ImageButton cancelButton = findViewById(R.id.cancel_sync);
+    if (cancelButton != null) {
+      cancelButton.setVisibility(entryManager.isModelCurrentlyUpdated() && !entryManager.isCancelRequested() ? View.VISIBLE : View.INVISIBLE);
+      if (cancelButton.getVisibility() == View.VISIBLE) {
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+            entryManager.cancel();
+          }
+        });
+      }
     }
 
     refreshButton.setTag("Refresh");
