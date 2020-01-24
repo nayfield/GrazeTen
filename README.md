@@ -1,12 +1,9 @@
-# This is an import of GrazeRSS into Android Studio 3.5.3
-
-# See TODO.txt for goals
+# GrazeTEN - GrazeRSS targeting Android 10
 
 
-This is the GrazeRSS source repository. 
-
-GrazeRSS is based on the NewsRob project, without which GrazeRSS would not exist. 
-
-Use of the NewsRob logo and the NewsRob name is not permitted.
-
-The rest is provided under the MIT license. http://opensource.org/licenses/MIT
+* This is the GrazeTEN source repository.
+* GrazeTEN is based on GrazeRSS, without which GrazeTEN would not exist.
+* GrazeRSS is based on the NewsRob project, without which GrazeRSS would not exist.
+  * It's turtles all the way down.
+* Use of the NewsRob logo and the NewsRob name is not permitted.
+* The rest is provided under the MIT license.
