@@ -4,7 +4,7 @@
 	android:label="@string/search_label"
 	android:hint="enter keyword"
 	android:searchSuggestAuthority="articles"
-	android:searchSuggestIntentAction="com.grazerss.VIEW"
+	android:searchSuggestIntentAction="com.grazeten.VIEW"
 	android:searchSuggestThreshold="3"
 	android:queryAfterZeroResults="false"
 	>

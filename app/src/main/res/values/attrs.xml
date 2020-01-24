@@ -22,7 +22,7 @@
 			format="boolean" />
 	</declare-styleable>
 	<declare-styleable
-		name="com.grazerss.Gradient">
+		name="com.grazeten.Gradient">
 		<attr
 			name="startColor"
 			format="color" />
@@ -31,7 +31,7 @@
 			format="color" />
 	</declare-styleable>
 	<declare-styleable
-		name="com.grazerss.List">
+		name="com.grazeten.List">
 		<attr
 			name="lightTextColor"
 			format="color" />
@@ -66,7 +66,7 @@
 			format="reference|color" />
 	</declare-styleable>
 	<declare-styleable
-		name="com.grazerss.Preference">
+		name="com.grazeten.Preference">
 		<attr
 			name="x"
 			format="string" />

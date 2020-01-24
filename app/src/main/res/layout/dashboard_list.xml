@@ -37,7 +37,7 @@
                 android:gravity="top|center_horizontal"
 
                 android:paddingBottom="2dip"
-                android:textColor="?com.grazerss:lightTextColor"
+                android:textColor="?com.grazeten:lightTextColor"
                 android:ellipsize="end"
                 android:layout_weight="1.0"
                 android:lines="1" />
@@ -87,7 +87,7 @@
         <ListView
             android:id="@android:id/list"
 
-            android:divider="?com.grazerss:dividerColor"
+            android:divider="?com.grazeten:dividerColor"
             android:dividerHeight="1px"
 
             android:layout_width="fill_parent"

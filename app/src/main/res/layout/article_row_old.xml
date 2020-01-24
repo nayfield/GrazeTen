@@ -19,7 +19,7 @@
     android:layout_marginTop="4dp"
     android:layout_marginBottom="4dp" />
 
-  <com.grazerss.widget.SwipeRelativeLayout
+  <com.grazeten.widget.SwipeRelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
 
     android:id="@+id/swipe_container"
@@ -44,8 +44,8 @@
       android:layout_marginTop="0dp"
 
       android:textSize="13sp"
-      android:textColor="?com.grazerss:lightTextColor"
-      android:background="?com.grazerss:dividerColor"
+      android:textColor="?com.grazeten:lightTextColor"
+      android:background="?com.grazeten:dividerColor"
 
       android:gravity="center"
       android:layout_gravity="bottom"
@@ -143,7 +143,7 @@
 
       android:textSize="13dp"
 
-      android:textColor="?com.grazerss:articleHeaderTextColor"
+      android:textColor="?com.grazeten:articleHeaderTextColor"
 
       android:paddingRight="2dp" />
 
@@ -159,7 +159,7 @@
 
       android:layout_marginTop="-3dp"
      
-      android:textColor="?com.grazerss:articleHeaderTextColor"
+      android:textColor="?com.grazeten:articleHeaderTextColor"
 
 
       android:textSize="16dp"
@@ -173,12 +173,12 @@
 
       android:layout_below="@id/entry_title"
 
-      android:textColor="?com.grazerss:articleHeaderTextColor"
+      android:textColor="?com.grazeten:articleHeaderTextColor"
 
 
       android:textSize="12dp"
       android:visibility="gone" />
 
-  </com.grazerss.widget.SwipeRelativeLayout>
+  </com.grazeten.widget.SwipeRelativeLayout>
 </LinearLayout>
   <!-- android:autoLink="web"  -->
