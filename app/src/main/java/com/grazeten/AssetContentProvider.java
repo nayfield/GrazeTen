@@ -15,7 +15,7 @@ import com.grazeten.storage.IStorageAdapter;
 // LATER ... Make the add here too?
 public class AssetContentProvider extends ContentProvider
 {
-  public static final Uri     CONTENT_URI = Uri.parse("content://com.grazerss.assets");
+  public static final Uri     CONTENT_URI = Uri.parse("content://com.grazeten.assets");
   private static final String TAG         = AssetContentProvider.class.getName();
   private IStorageAdapter     fileContextAdapter;
 

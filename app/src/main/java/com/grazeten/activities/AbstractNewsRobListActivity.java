@@ -555,7 +555,7 @@ public abstract class AbstractNewsRobListActivity extends ListActivity
     super.onCreate(savedInstanceState);
 
     /*
-     * if ("com.grazerss.VIEW".equals(getIntent().getAction())) { Intent i = new Intent(this, ShowArticleActivity.class); i.putExtra("atomId",
+     * if ("com.grazeten.VIEW".equals(getIntent().getAction())) { Intent i = new Intent(this, ShowArticleActivity.class); i.putExtra("atomId",
      * getIntent().getDataString()); startActivity(i); finish(); } else {
      */
 
@@ -721,7 +721,7 @@ public abstract class AbstractNewsRobListActivity extends ListActivity
       case R.id.menu_settings:
         if (false) {
           Intent intent1 = new Intent();
-          intent1.setClassName("com.grazerss", "com.grazerss.activities.ArticleListActivity");
+          intent1.setClassName("com.grazeten", "com.grazeten.activities.ArticleListActivity");
           intent1.putExtra("FEED_URL", "xxx"); // http://www.spiegel.de/schlagzeilen/index.rss
           startActivity(intent1);
           return true;
@@ -755,7 +755,7 @@ public abstract class AbstractNewsRobListActivity extends ListActivity
 //        if (false) {
 //          Intent intent = new Intent();
 //
-//          intent.setClassName("com.grazerss", "com.grazerss.activities.ArticleListActivity");
+//          intent.setClassName("com.grazeten", "com.grazeten.activities.ArticleListActivity");
 //
 //          intent.putExtra("FEED_URL", "xxx"); // http://www.spiegel.de/schlagzeilen/index.rss
 //

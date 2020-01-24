@@ -151,7 +151,7 @@ public class UIHelper
         break;
     }
 
-    int backgroundResource = resources.getIdentifier(resourceName, "drawable", "com.grazerss");
+    int backgroundResource = resources.getIdentifier(resourceName, "drawable", "com.grazeten");
     resourceIdCache[cacheKey] = backgroundResource;
     return backgroundResource;
   }

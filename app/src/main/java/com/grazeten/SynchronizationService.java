@@ -166,7 +166,7 @@ public class SynchronizationService extends Service
 
   public static final String   EXTRA_MANUAL_SYNC         = "manual_sync";
 
-  private static final String  PREF_KEY_LAST_STARTED     = "com.grazerss.synchronization.lastStarted";
+  private static final String  PREF_KEY_LAST_STARTED     = "com.grazeten.synchronization.lastStarted";
 
   private static WakeLock      wl;
   private Handler              handler;

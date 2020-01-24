@@ -6,45 +6,45 @@
     </style>
     
     <style name="Theme.NewsRob_Light_Normal" parent="@android:style/Theme.Light">
-      <item name="com.grazerss:startColor">#123</item>
-      <item name="com.grazerss:endColor">#456</item>
-      <item name="com.grazerss:lightTextColor">#fff</item>
-      <item name="com.grazerss:articleHeaderTextColor">#333</item>
-      <item name="com.grazerss:articleSnippetTextColor">#777</item>
-      <item name="com.grazerss:feedTitleTextColor">#777</item>
-      <item name="com.grazerss:sharedByTextColor">#777</item>
-      <item name="com.grazerss:dividerColor">#bbb</item>
-      <item name="com.grazerss:controlPanelDividerColor">#bbb</item>
-      <item name="com.grazerss:controlPanelBottomDividerColor">#0f00</item>
+      <item name="com.grazeten:startColor">#123</item>
+      <item name="com.grazeten:endColor">#456</item>
+      <item name="com.grazeten:lightTextColor">#fff</item>
+      <item name="com.grazeten:articleHeaderTextColor">#333</item>
+      <item name="com.grazeten:articleSnippetTextColor">#777</item>
+      <item name="com.grazeten:feedTitleTextColor">#777</item>
+      <item name="com.grazeten:sharedByTextColor">#777</item>
+      <item name="com.grazeten:dividerColor">#bbb</item>
+      <item name="com.grazeten:controlPanelDividerColor">#bbb</item>
+      <item name="com.grazeten:controlPanelBottomDividerColor">#0f00</item>
       <item name="webViewBackgroundColorLight">#fff</item>
-      <item name="com.grazerss:countBackground">@com.grazerss:drawable/count_background</item>
+      <item name="com.grazeten:countBackground">@com.grazeten:drawable/count_background</item>
     </style>
     
     <style name="Theme.NewsRob_Dark_Normal" parent="@android:style/Theme.Black">
-      <item name="com.grazerss:startColor">#789</item>
-      <item name="com.grazerss:endColor">#0ab</item>
-      <item name="com.grazerss:lightTextColor">#999</item>
-      <item name="com.grazerss:articleHeaderTextColor">#999</item>
-      <item name="com.grazerss:articleSnippetTextColor">#777</item>
-      <item name="com.grazerss:feedTitleTextColor">#777</item>
-      <item name="com.grazerss:sharedByTextColor">#777</item>
+      <item name="com.grazeten:startColor">#789</item>
+      <item name="com.grazeten:endColor">#0ab</item>
+      <item name="com.grazeten:lightTextColor">#999</item>
+      <item name="com.grazeten:articleHeaderTextColor">#999</item>
+      <item name="com.grazeten:articleSnippetTextColor">#777</item>
+      <item name="com.grazeten:feedTitleTextColor">#777</item>
+      <item name="com.grazeten:sharedByTextColor">#777</item>
       <item name="webViewBackgroundColorLight">#bbb</item>
-      <item name="com.grazerss:dividerColor">#333</item>
-      <item name="com.grazerss:controlPanelDividerColor">#999</item>
-      <item name="com.grazerss:controlPanelBottomDividerColor">#0999</item>
-      <item name="com.grazerss:countBackground">@com.grazerss:drawable/count_background_dark</item>
+      <item name="com.grazeten:dividerColor">#333</item>
+      <item name="com.grazeten:controlPanelDividerColor">#999</item>
+      <item name="com.grazeten:controlPanelBottomDividerColor">#0999</item>
+      <item name="com.grazeten:countBackground">@com.grazeten:drawable/count_background_dark</item>
     </style>
     
     <style name="TitleBarSeparator">
       <item name="android:layout_width">1px</item>
       <item name="android:layout_height">fill_parent</item>
-      <item name="android:background">?com.grazerss:controlPanelDividerColor</item> <!--  TODO  -->
+      <item name="android:background">?com.grazeten:controlPanelDividerColor</item> <!--  TODO  -->
     </style>
     
     <style name="ControlPanelSeparator">
       <item name="android:layout_width">fill_parent</item>
       <item name="android:layout_height">1px</item>
-      <item name="android:background">?com.grazerss:controlPanelBottomDividerColor</item> <!--  TODO  -->
+      <item name="android:background">?com.grazeten:controlPanelBottomDividerColor</item> <!--  TODO  -->
     </style>
     
     <style name="TitleBarText" parent="@android:style/TextAppearance.Medium">

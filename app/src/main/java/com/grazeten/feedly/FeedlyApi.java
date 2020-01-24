@@ -19,7 +19,7 @@ public interface FeedlyApi
   public static final String BASE_URL                  = "https://cloud.feedly.com";
   public static final String AUTH_URL                  = BASE_URL + "/v3/auth/auth";
 
-  public static final String CLIENT_ID                 = "grazerss";
+  public static final String CLIENT_ID                 = "grazeten";
   public static final String REDIRECT_URI              = "http://localhost";
 
   public static final String SHPREF_KEY_FEEDLY_USER_ID = "Feedly_User_Id";

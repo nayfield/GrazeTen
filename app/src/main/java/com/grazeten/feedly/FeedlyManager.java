@@ -157,7 +157,7 @@ public class FeedlyManager implements FeedlyKey
   public StreamContentResponse getUnreadGrazeRSSOnly(boolean newestFirst, Long lastUpdate, Integer maxItems, String continuation)
   {
     String ranked = newestFirst ? "newest" : "oldest";
-    return api.getStreamContent(getAuthHeader(), "user/" + userId + "/category/grazerss", maxItems, ranked, true, lastUpdate, continuation);
+    return api.getStreamContent(getAuthHeader(), "user/" + userId + "/category/grazeten", maxItems, ranked, true, lastUpdate, continuation);
   }
 
   public boolean isTokenExpired()

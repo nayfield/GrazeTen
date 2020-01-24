@@ -194,7 +194,7 @@ public class SettingsRenderer
     {
       throw new IllegalStateException(ctx.getPackageName() + " was not found when quering the Package Manager.", e);
     }
-    final int checkSignature = ctx.getPackageManager().checkSignatures("com.grazerss", EntryManager.PRO_PACKAGE_NAME);
+    final int checkSignature = ctx.getPackageManager().checkSignatures("com.grazeten", EntryManager.PRO_PACKAGE_NAME);
     boolean proVersion = checkSignature == PackageManager.SIGNATURE_MATCH || checkSignature == PackageManager.SIGNATURE_NEITHER_SIGNED;
     return packageInfo.versionName + (proVersion ? " Pro" : "");
   }

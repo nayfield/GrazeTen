@@ -728,8 +728,8 @@ public class EntriesRetriever implements BackendProvider
   /*
    * (non-Javadoc)
    * 
-   * @see com.grazerss.SyncInterface#differentialUpdateOfArticlesStates(com.grazerss .EntryManager, com.grazerss.jobs.Job, java.lang.String, java.lang.String,
-   * com.grazerss.ArticleDbState)
+   * @see com.grazeten.SyncInterface#differentialUpdateOfArticlesStates(com.grazeten .EntryManager, com.grazeten.jobs.Job, java.lang.String, java.lang.String,
+   * com.grazeten.ArticleDbState)
    */
   @Override
   public void differentialUpdateOfArticlesStates(final EntryManager entryManager, Job job, String stream, String excludeState,
@@ -794,7 +794,7 @@ public class EntriesRetriever implements BackendProvider
   /*
    * (non-Javadoc)
    * 
-   * @see com.grazerss.SyncInterface#discoverFeeds(java.lang.String)
+   * @see com.grazeten.SyncInterface#discoverFeeds(java.lang.String)
    */
   @Override
   public List<DiscoveredFeed> discoverFeeds(final String query) throws SyncAPIException, IOException, AuthenticationExpiredException,
@@ -1787,7 +1787,7 @@ public class EntriesRetriever implements BackendProvider
   /*
    * (non-Javadoc)
    * 
-   * @see com.grazerss.SyncInterface#submitSubscribe(java.lang.String)
+   * @see com.grazeten.SyncInterface#submitSubscribe(java.lang.String)
    */
   @Override
   public boolean submitSubscribe(String url2subscribe) throws SyncAPIException
@@ -1929,7 +1929,7 @@ public class EntriesRetriever implements BackendProvider
   /*
    * (non-Javadoc)
    * 
-   * @see com.grazerss.SyncInterface#unsubscribeFeed(java.lang.String)
+   * @see com.grazeten.SyncInterface#unsubscribeFeed(java.lang.String)
    */
   @Override
   public void unsubscribeFeed(String feedAtomId) throws IOException, NeedsSessionException, SyncAPIException

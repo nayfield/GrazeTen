@@ -64,7 +64,7 @@ public class NewsRob extends Application
     public void uncaughtException(final Thread t, final Throwable e)
     {
 
-      Log.e("GrazeRSS", "Caught the following exception: ", e);
+      Log.e("grazeten", "Caught the following exception: ", e);
 
       final StringBuilder message = new StringBuilder(
           "Sorry!\n\nGrazeTEN hit a wall. Please send this mail, so that the developer can analyze/fix the issue.\nIf it is not too much to ask, please add to this mail what you just did between the following lines:\n\n-------\n\n\n-------\n");

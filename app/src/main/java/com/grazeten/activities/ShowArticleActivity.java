@@ -636,7 +636,7 @@ public class ShowArticleActivity extends Activity implements IEntryModelUpdateLi
     backgroundColorDark = Color.argb(255, 11, 11, 11);
 
     int position = i.getExtras().getInt(UIHelper.EXTRA_KEY_POSITION);
-    if ("com.grazerss.VIEW".equals(i.getAction()))
+    if ("com.grazeten.VIEW".equals(i.getAction()))
     {
       contentCursor = getEntryManager().getArticleAsCursor(i.getDataString());
     }

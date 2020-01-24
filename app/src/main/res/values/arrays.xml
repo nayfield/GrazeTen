@@ -144,9 +144,9 @@
     </string-array>
   <string-array
     name="service_provider_values">
-    <item>com.grazerss.NewsBlurBackendProvider</item>
-    <item>com.grazerss.oldreader.OldReaderBackendProvider</item>
-    <item>com.grazerss.feedly.FeedlyBackendProvider</item>
+    <item>com.grazeten.NewsBlurBackendProvider</item>
+    <item>com.grazeten.oldreader.OldReaderBackendProvider</item>
+    <item>com.grazeten.feedly.FeedlyBackendProvider</item>
     </string-array>
   
   <string-array

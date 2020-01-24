@@ -128,10 +128,10 @@ public class EntryManager implements SharedPreferences.OnSharedPreferenceChangeL
 
   public static final int     LAST_VERSION_CHECK_INTERVAL_MINUTES                  = 24 * 60;
 
-  public static final String  LEGACY_PACKAGE_NAME                                  = "com.grazerss.threetosix";
+  public static final String  LEGACY_PACKAGE_NAME                                  = "com.grazeten.threetosix";
   public static final String  MARKET_PACKAGE_NAME                                  = "com.android.vending";
   private static final int    MAX_ARTICLES_IN_ARTICLE_LIST                         = 250;
-  public static final String  PRO_PACKAGE_NAME                                     = "com.grazerss.pro";
+  public static final String  PRO_PACKAGE_NAME                                     = "com.grazeten.pro";
   private static final String SETTING_SWIPE_ARTICLE_DETAIL_VIEW                    = "settings_swipe_article_detail_view";
 
   private static final String SETTING_SWIPE_ARTICLE_LIST                           = "settings_swipe_article_list";
@@ -155,7 +155,7 @@ public class EntryManager implements SharedPreferences.OnSharedPreferenceChangeL
   static final String         SETTINGS_GLOBAL_DOWNLOAD_PREF_KEY                    = "settings_global_download_pref";
 
   private static final String SETTINGS_GOOGLE_USER_ID                              = "settings_google_user_id";
-  private static final String SETTINGS_GR_UPDATED_KEY                              = "com.grazerss.gr_updated";
+  private static final String SETTINGS_GR_UPDATED_KEY                              = "com.grazeten.gr_updated";
   private static final String SETTINGS_LAST_READ_SYNC_KEY                          = "settings_last_read_sync";
   private static final String SETTINGS_LAST_STAR_SYNC_KEY                          = "settings_last_star_sync";
   static final String         SETTINGS_HIDE_READ_ITEMS                             = "settings_hide_read_items";
@@ -169,7 +169,7 @@ public class EntryManager implements SharedPreferences.OnSharedPreferenceChangeL
 
   public static final String  SETTINGS_INCREMENTAL_SYNC_ENABLED                    = "settings_incremental_syncing_enabled";
 
-  static final String         SETTINGS_INSTALLED_AT                                = "com.grazerss.installed_at";
+  static final String         SETTINGS_INSTALLED_AT                                = "com.grazeten.installed_at";
 
   public static final String  SETTINGS_KEEP_NOTES                                  = "settings_keep_notes";
   public static final String  SETTINGS_KEEP_SHARED                                 = "settings_keep_shared";
@@ -1493,7 +1493,7 @@ public class EntryManager implements SharedPreferences.OnSharedPreferenceChangeL
   public final int getThemeResourceId(String colorScheme)
   {
     String key = "Theme.NewsRob_" + colorScheme + "_Normal";
-    return ctx.getResources().getIdentifier(key, "style", "com.grazerss");
+    return ctx.getResources().getIdentifier(key, "style", "com.grazeten");
   }
 
   public int getUnreadArticleCount()
@@ -1802,7 +1802,7 @@ public class EntryManager implements SharedPreferences.OnSharedPreferenceChangeL
   {
     if (proVersion == null)
     {
-      final int checkSignature = ctx.getPackageManager().checkSignatures("com.grazerss", EntryManager.PRO_PACKAGE_NAME);
+      final int checkSignature = ctx.getPackageManager().checkSignatures("com.grazeten", EntryManager.PRO_PACKAGE_NAME);
 
       proVersion = (checkSignature == PackageManager.SIGNATURE_MATCH) || (checkSignature == PackageManager.SIGNATURE_NEITHER_SIGNED);
 
@@ -3077,7 +3077,7 @@ public class EntryManager implements SharedPreferences.OnSharedPreferenceChangeL
 
             Intent i = new Intent();
             i.setAction("org.adw.launcher.counter.SEND");
-            i.putExtra("PNAME", "com.grazerss");
+            i.putExtra("PNAME", "com.grazeten");
             i.putExtra("COUNT", getUnreadArticleCount());
             ctx.sendBroadcast(i);
             PL.log("EntryManager.updateWidgets sent notification to ADW.", ctx);

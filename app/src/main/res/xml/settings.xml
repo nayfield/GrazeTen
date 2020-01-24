@@ -3,7 +3,7 @@
 
     <PreferenceScreen android:title="@string/settings_automatic_refreshing_category_title" >
         <com.grazeten.preference.ListPreference
-            android:defaultValue="com.grazerss.NewsBlurBackendProvider"
+            android:defaultValue="com.grazeten.NewsBlurBackendProvider"
             android:entries="@array/service_provider_labels"
             android:entryValues="@array/service_provider_values"
             android:key="settings_service_provider"
@@ -38,9 +38,9 @@
             android:title="Always Use Exact Syncing" />
          <CheckBoxPreference
              android:defaultValue="false"
-             android:key="settings_sync_grazerss_only_enabled"
-             android:summary="Sync only articles that in a folder/tag called \&apos;grazerss\&apos;."
-             android:title="Sync \&apos;grazerss\&apos; Only" />
+             android:key="settings_sync_grazeten_only_enabled"
+             android:summary="Sync only articles that in a folder/tag called \&apos;grazeten\&apos;."
+             android:title="Sync \&apos;grazeten\&apos; Only" />
 
         <PreferenceCategory android:title="@string/settings_offline" >
             <com.grazeten.preference.ListPreference
@@ -134,7 +134,7 @@
             android:summary="@string/ui_mark_all_read_confirmation_threshold_summary"
             android:title="@string/ui_mark_all_read_confirmation_threshold_title" />
         <!--
-			<com.grazerss.preference.ListPreference
+			<com.grazeten.preference.ListPreference
 			android:entries="@array/settings_ui_theme_labels"
 			android:entryValues="@array/settings_ui_theme_values"
 			android:key="settings_ui_theme"
@@ -220,7 +220,7 @@
         </PreferenceCategory>
 
         <!--
-			<com.grazerss.preference.ListPreference
+			<com.grazeten.preference.ListPreference
 			android:entries="@array/ui_theme_pref_labels"
 			android:entryValues="@array/ui_theme_pref_values"
 			android:key="settings_ui_theme"

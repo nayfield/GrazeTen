@@ -80,7 +80,7 @@
             android:label="@string/show_article"
             android:launchMode="singleTop" >
             <intent-filter>
-                <action android:name="com.grazerss.VIEW" />
+                <action android:name="com.grazeten.VIEW" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -112,7 +112,7 @@
 
         <!--
             <activity
-            android:name="com.grazerss.activities.DebugActivity"
+            android:name="com.grazeten.activities.DebugActivity"
             android:configChanges="orientation|keyboardHidden|keyboard"
             android:clearTaskOnLaunch="true"> <intent-filter> <action
             android:name="android.settings.ADD_ACCOUNT_SETTINGS" />
@@ -144,7 +144,7 @@
             android:name="com.grazeten.activities.ShowMessageActivity"
             android:configChanges="orientation|keyboardHidden|keyboard"
             android:label="Show Message"
-            android:process="com.grazerss.message.show"
+            android:process="com.grazeten.message.show"
             android:theme="@android:style/Theme.Dialog" />
         <activity
             android:name="com.grazeten.activities.ManageFeedActivity"
@@ -190,9 +190,9 @@
         <receiver android:name="com.grazeten.locale.FireReceiver" >
             <intent-filter>
                 <action android:name="com.twofortyfouram.locale.intent.action.FIRE_SETTING" />
-                <action android:name="com.grazerss.SYNC" />
-                <action android:name="com.grazerss.UP_SYNC" />
-                <action android:name="com.grazerss.CANCEL_SYNC" />
+                <action android:name="com.grazeten.SYNC" />
+                <action android:name="com.grazeten.UP_SYNC" />
+                <action android:name="com.grazeten.CANCEL_SYNC" />
             </intent-filter>
         </receiver>
         <receiver android:name="com.grazeten.WakeupAndSynchronizeReceiver" />
@@ -219,7 +219,7 @@
             </intent-filter>
             <!--
                 <intent-filter> <action
-                android:name="com.grazerss.MODEL_UPDATED" />
+                android:name="com.grazeten.MODEL_UPDATED" />
                 </intent-filter>
             -->
             <meta-data
@@ -228,7 +228,7 @@
         </receiver>
 
         <!--
-            <provider android:name="com.grazerss.search.SearchProvider"
+            <provider android:name="com.grazeten.search.SearchProvider"
             android:authorities="articles" android:syncable="false" />
         -->
 
