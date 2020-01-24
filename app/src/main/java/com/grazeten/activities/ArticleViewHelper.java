@@ -231,7 +231,7 @@ class ArticleViewHelper
   private static Intent createShareArticleSendIntent(final Entry selectedEntry)
   {
     Intent shareArticleSendIntent = new Intent(Intent.ACTION_SEND);
-    // sendIntent.setType("message/rfc822");
+    shareArticleSendIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     shareArticleSendIntent.setType("text/html");
     shareArticleSendIntent.putExtra(Intent.EXTRA_SUBJECT, selectedEntry.getTitle());
 
@@ -265,7 +265,6 @@ class ArticleViewHelper
     }
 
     Intent sendIntent = new Intent(Intent.ACTION_SEND);
-    // sendIntent.setType("message/rfc822");
     sendIntent.setType("text/plain");
     sendIntent.putExtra(Intent.EXTRA_SUBJECT, selectedEntry.getTitle());
     sendIntent.putExtra(Intent.EXTRA_TEXT, String.valueOf(uri));

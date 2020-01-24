@@ -1,12 +1,12 @@
 package com.grazeten.util;
 
-import java.net.URISyntaxException;
-
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.util.Log;
+
+import java.net.URISyntaxException;
 
 public class WebViewHelper6
 {
@@ -35,6 +35,7 @@ public class WebViewHelper6
       if (packagename != null)
       {
         intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://search?q=pname:" + packagename));
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.addCategory(Intent.CATEGORY_BROWSABLE);
         owningActivity.startActivity(intent);
         return true;
