@@ -1,14 +1,5 @@
 package com.grazeten;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.lang.Thread.UncaughtExceptionHandler;
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Properties;
-import java.util.regex.Pattern;
-
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
@@ -22,6 +13,15 @@ import com.grazeten.util.NewsRobStrictMode;
 import com.grazeten.util.SDKVersionUtil;
 import com.grazeten.util.U;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.lang.Thread.UncaughtExceptionHandler;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Properties;
+import java.util.regex.Pattern;
+
 public class NewsRob extends Application
 {
 
@@ -30,7 +30,7 @@ public class NewsRob extends Application
 
     private final UncaughtExceptionHandler oldDefaultExceptionHandler;
     private final NewsRob                  context;
-    private static final String            TAG = "NewsRobDefaultExceptionHandler";
+    private static final String            TAG = "NewsRobDefaultExHandler";
 
     NewsRobDefaultExceptionHandler(final NewsRob context)
     {
@@ -198,7 +198,9 @@ public class NewsRob extends Application
           || Pattern.compile("lacks android.permission.USE_CREDENTIALS").matcher(messageBody).find())
       {
         final Uri uri = Uri.parse("http://newsrob.blogspot.com/2009/09/broken-permissions-due-to-rooting-your.html");
-        context.startActivity(new Intent(Intent.ACTION_VIEW, uri));
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);
         return;
       }
 

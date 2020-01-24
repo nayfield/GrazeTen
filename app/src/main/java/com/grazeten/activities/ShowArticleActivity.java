@@ -1051,19 +1051,23 @@ public class ShowArticleActivity extends Activity implements IEntryModelUpdateLi
     {
       Uri uri = Uri.parse(webView.getHitTestResult().getExtra());
 
+      Intent browserIntent = new Intent(Intent.ACTION_VIEW, uri);
+      browserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
       menu.add(0, ArticleViewHelper.MENU_ITEM_SHOW_IN_BROWSER_ID, 0, R.string.menu_show_in_browser)
-          .setTitleCondensed(U.t(this, R.string.menu_show_in_browser_condensed)).setIntent(new Intent(Intent.ACTION_VIEW, uri))
+          .setTitleCondensed(U.t(this, R.string.menu_show_in_browser_condensed)).setIntent(browserIntent)
           .setIcon(android.R.drawable.ic_menu_view);
 
       Intent sendIntent = new Intent(Intent.ACTION_SEND);
-      // sendIntent.setType("message/rfc822");
       sendIntent.setType("text/plain");
       sendIntent.putExtra(Intent.EXTRA_SUBJECT, String.valueOf(uri));
       sendIntent.putExtra(Intent.EXTRA_TEXT, String.valueOf(uri));
-
-      menu.add(0, ArticleViewHelper.MENU_ITEM_SHARE_LINK_ID, 0, R.string.menu_item_share_link).setIntent(Intent.createChooser(sendIntent, null))
+      sendIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+      sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+      Intent chooserIntent = Intent.createChooser(sendIntent, null);
+      chooserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+      menu.add(0, ArticleViewHelper.MENU_ITEM_SHARE_LINK_ID, 0, R.string.menu_item_share_link)
+          .setIntent(chooserIntent)
           .setIcon(android.R.drawable.ic_menu_share);
-
     }
     else
     {
