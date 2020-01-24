@@ -7,3 +7,23 @@
   * It's turtles all the way down.
 * Use of the NewsRob logo and the NewsRob name is not permitted.
 * The rest is provided under the MIT license.
+
+The goal of GrazeTEN is to provide the same functionality of previous versions, but on a modern
+version of Android.  The initial release targets API level 29 - Android 10 ("Q")
+
+Non-goals include:
+* Modernizing UI
+* Adding / Changing functionality
+
+
+The initial release fixes the issues in my particular use of the software.  Thus, it may
+not work entirely for *your* needs.  For example, I do not use Mobilizers or service
+providers other than NewsBlur.
+
+The project accepts issue reports [here](https://github.com/nayfield/GrazeTen/issues) .  However,
+you are much more likely to get an issue fixed by providing mergeable pull requests.
+
+
+The source code for GrazeTEN is [here](https://github.com/nayfield/GrazeTen).
+
+
