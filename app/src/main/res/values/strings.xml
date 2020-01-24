@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="app_name">GrazeRSS</string>
+	<string name="app_name">GrazeTEN</string>
 	<string name="app_description">A multi-platform offline\nnews client for Android</string>
     <string name="article_list">Article List</string>
     <string name="feed_list">Feed List</string>
@@ -17,7 +17,7 @@
   <string name="menu_item_search">Search</string>
 	
 	
-	<string name="dashboard_label">GrazeRSS</string>
+	<string name="dashboard_label">GrazeTEN</string>
 	<string name="feed_list_label">Feeds</string>
 	<string name="article_list_label">Articles</string>
    
@@ -37,13 +37,13 @@
     <string name="explain_fullscreen_toggle_message"><h2><b><i><u>Tip:</u></i></b></h2>\n\nYou can enter / leave the <pre>full screen mode</pre> by tapping twice in the content area (the article body).\n</string>
     
     <string name="usage_data_collection">Usage Data Collection</string>
-    <string name="usage_data_collection_text">GrazeRSS would like to anonymously collect your usage data using flurry.com. This data will help the developer understand how you use GrazeRSS so that he can improve it.\n
+    <string name="usage_data_collection_text">GrazeTEN would like to anonymously collect your usage data using flurry.com. This data will help the developer understand how you use GrazeTEN so that he can improve it.\n
 \nThis data collection is strictly opt-in, so if you do not approve no data will be collected. The application will continue to function normally regardless of this setting.\n
-\nCurrently, only general data will be collected: what device you use, your GrazeRSS and Android versions, which country you are in, which GrazeRSS screens you use and how long you use each screen.\n
-\nIn the future, more specific data may be collected, such as which menu options you use most frequently, GrazeRSS configuration information, etc. Before this happens however, this dialog will appear again and ask you again to allow this data to be gathered.\n
+\nCurrently, only general data will be collected: what device you use, your GrazeTEN and Android versions, which country you are in, which GrazeTEN screens you use and how long you use each screen.\n
+\nIn the future, more specific data may be collected, such as which menu options you use most frequently, GrazeTEN configuration information, etc. Before this happens however, this dialog will appear again and ask you again to allow this data to be gathered.\n
 \nAt any time you may open the settings and enable or disable the data collection.\n
 \n<b><u>Tip:</u></b>\n
-\nIt is recommended to enable the usage data collection.\nIf you use GrazeRSS in any unusual way, or use a rare device or Android version, this is your opportunity to make the developer aware of it so that he can better support you.\n
+\nIt is recommended to enable the usage data collection.\nIf you use GrazeTEN in any unusual way, or use a rare device or Android version, this is your opportunity to make the developer aware of it so that he can better support you.\n
     </string>
  
     <string name="newsrob_three_to_six">Please Re-Install</string>
@@ -69,7 +69,7 @@
 	<string name="enter_email_password">
 Login to &lt;b>$SERVICE$&lt;/b> needed
 &lt;p>&lt;p>
-GrazeRSS will connect to &lt;b>$SERVICE$&lt;/b>. Therefore your username and password is needed.&lt;p>&lt;p>
+GrazeTEN will connect to &lt;b>$SERVICE$&lt;/b>. Therefore your username and password is needed.&lt;p>&lt;p>
 You can decide if your password should be stored on this device.
 Otherwise you will be asked again for your credentials every sync.&lt;p>&lt;p>
 If you haven\'t used &lt;b>$SERVICE$&lt;/b> before, please visit $SERVICE_URL$ and set up an account. 
@@ -99,7 +99,7 @@ Otherwise you will be asked again for your credentials every two weeks.
 	<string name="settings_automatic_refreshing_title">Auto Synchronization</string>
 	<string name="settings_automatic_refreshing_summary">Enable automatic synchronization.</string>
 	<string name="settings_automatic_refresh_interval_title">Synchronization Interval</string>
-	<string name="settings_automatic_refresh_interval_summary">How often should GrazeRSS sync and download content?</string>
+	<string name="settings_automatic_refresh_interval_summary">How often should GrazeTEN sync and download content?</string>
 
     <string name="settings_capacities">Capacities</string>
 	<string name="settings_global_download_pref_title">Download Content Default</string>
@@ -117,7 +117,7 @@ Otherwise you will be asked again for your credentials every two weeks.
     <string name="settings_display_title">Display</string>
    
     <string name="settings_ui_theme_title">Theme</string>
-    <string name="settings_ui_theme_summary">Select the color scheme of GrazeRSS.</string>
+    <string name="settings_ui_theme_summary">Select the color scheme of GrazeTEN.</string>
    
     <string name="settings_ui_sort_newest_first_title">Newest On The Top</string>
     <string name="settings_ui_sort_newest_first_summary">Default Sort Order in Article List: Newest on the top?</string>
@@ -177,7 +177,7 @@ Otherwise you will be asked again for your credentials every two weeks.
    	<string name="ui_theme_title">Theme</string>
    	<string name="ui_theme_summary">Theme</string>
    	
-   	<string name="oom_message"><b>Sorry!</b>\n\nThere was not enough memory to complete the operation.\n\nYou already closed the app (force closed), now press OK and GrazeRSS will be restarted. Please try again then what you just did.\nIt should work now.\n\nSorry for the inconvenience.\n\nIf this should happen on a regular basis and you can reproduce it, I would like to hear about it: travis@tabbal.net.\n</string>
+   	<string name="oom_message"><b>Sorry!</b>\n\nThere was not enough memory to complete the operation.\n\nYou already closed the app (force closed), now press OK and GrazeTEN will be restarted. Please try again then what you just did.\nIt should work now.\n\nSorry for the inconvenience.\n\nIf this should happen on a regular basis and you can reproduce it, I would like to hear about it: travis@tabbal.net.\n</string>
    	 
     <string name="advise_sdcard_read_only_title">SD card inaccessible</string>
     <string name="advise_sdcard_read_only">
@@ -189,9 +189,9 @@ Otherwise you will be asked again for your credentials every two weeks.
          - SD card is almost full\n
          - SD card is read-only\n\n
         <u>Impact:</u>\n
-        Until the SD card is accessible again GrazeRSS cannot synchronize or display downloaded articles.\n\n
+        Until the SD card is accessible again GrazeTEN cannot synchronize or display downloaded articles.\n\n
         <u>Resolution:</u>\n
-        Make the SD card accessible to continue using GrazeRSS or set <i>Storage Provider</i> to <i>Phone Memory</i> in the settings.\n
+        Make the SD card accessible to continue using GrazeTEN or set <i>Storage Provider</i> to <i>Phone Memory</i> in the settings.\n
     </string>
  
 	<string name="settings_local_store_category_title">Local Cache</string>
@@ -208,12 +208,12 @@ Otherwise you will be asked again for your credentials every two weeks.
 	<string name="storage_provider_summary">The storage provider for the downloaded content.</string>
 	
 	
-	<string name="google_error_label">The server has sent a response that GrazeRSS
+	<string name="google_error_label">The server has sent a response that GrazeTEN
 		cannot parse (yet).</string>
 	<string name="show_google_error_activity_label">Show Server Error</string>
 	<string name="synchronization_is_scheduled">Next synchronization\n starts in three minutes.
 	</string>
-	<string name="check_market_for_new_version">A new version of GrazeRSS is available!</string>
+	<string name="check_market_for_new_version">A new version of GrazeTEN is available!</string>
 	<string name="synchronization_running_notification_title">Update Running</string>
 	<string name="synchronization_running_notification_summary">An update is running.</string>
 	<string name="fast_synchronization_running_notification_title">Uploading Changes</string>
@@ -247,8 +247,8 @@ Otherwise you will be asked again for your credentials every two weeks.
 	<string name="google_account_email_summary">Change by logging out You will be prompted for the new account when refreshing.</string>
 	<string name="dialog_n_articles_will_be_marked_as_read">%s unread articles will be marked as read.</string>
 	<string name="new_version_available_title">Update available</string>
-	<string name="new_version_available_summary">An update of GrazeRSS is available!</string>
-	<string name="license">GrazeRSS License</string>
+	<string name="new_version_available_summary">An update of GrazeTEN is available!</string>
+	<string name="license">GrazeTEN License</string>
 	<string name="reject">Reject</string>
 	<string name="agree">Agree</string>
 	<string name="shared">shared</string>

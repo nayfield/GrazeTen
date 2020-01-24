@@ -2,28 +2,28 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <PreferenceScreen android:title="@string/settings_automatic_refreshing_category_title" >
-        <com.grazerss.preference.ListPreference
+        <com.grazeten.preference.ListPreference
             android:defaultValue="com.grazerss.NewsBlurBackendProvider"
             android:entries="@array/service_provider_labels"
             android:entryValues="@array/service_provider_values"
             android:key="settings_service_provider"
             android:summary="@string/settings_service_provider_summary"
             android:title="@string/settings_service_provider_title" />
-        <com.grazerss.preference.ListPreference
+        <com.grazeten.preference.ListPreference
             android:defaultValue="unread_articles_only"
             android:entries="@array/sync_type_labels"
             android:entryValues="@array/sync_type_values"
             android:key="settings_sync_type"
             android:summary="@string/settings_sync_type_summary"
             android:title="@string/settings_sync_type_title" />
-        <com.grazerss.preference.ListPreference
+        <com.grazeten.preference.ListPreference
             android:defaultValue="yes"
             android:entries="@array/sync_options_labels"
             android:entryValues="@array/sync_options_values"
             android:key="settings_automatic_refreshing_enabled2"
             android:summary="@string/settings_automatic_refreshing_summary"
             android:title="@string/settings_automatic_refreshing_title" />
-        <com.grazerss.preference.ListPreference
+        <com.grazeten.preference.ListPreference
             android:defaultValue="60"
             android:entries="@array/interval_labels"
             android:entryValues="@array/interval_values_minutes"
@@ -34,7 +34,7 @@
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="settings_always_exact_sync"
-            android:summary="Unselect if you only use GrazeRSS on one device, but not the webapp or other apps."
+            android:summary="Unselect if you only use GrazeTEN on one device, but not the webapp or other apps."
             android:title="Always Use Exact Syncing" />
          <CheckBoxPreference
              android:defaultValue="false"
@@ -43,14 +43,14 @@
              android:title="Sync \&apos;grazerss\&apos; Only" />
 
         <PreferenceCategory android:title="@string/settings_offline" >
-            <com.grazerss.preference.ListPreference
+            <com.grazeten.preference.ListPreference
                 android:defaultValue="yes"
                 android:entries="@array/sync_options_labels"
                 android:entryValues="@array/sync_options_values"
                 android:key="storage_asset_download"
                 android:summary="@string/storage_asset_download_summary"
                 android:title="@string/storage_asset_download_title" />
-            <com.grazerss.preference.ListPreference
+            <com.grazeten.preference.ListPreference
                 android:defaultValue="2"
                 android:entries="@array/global_download_pref_labels"
                 android:entryValues="@array/global_download_pref_values"
@@ -68,39 +68,39 @@
         </PreferenceCategory>
     </PreferenceScreen>
     <PreferenceScreen android:title="@string/settings_local_store_category_title" >
-        <com.grazerss.preference.ListPreference
+        <com.grazeten.preference.ListPreference
             android:defaultValue="phone"
             android:entries="@array/storage_provider_labels"
             android:entryValues="@array/storage_provider_values"
             android:key="settings_storage_provider"
             android:summary="@string/storage_provider_summary"
             android:title="@string/storage_provider_title" >
-        </com.grazerss.preference.ListPreference>
+        </com.grazeten.preference.ListPreference>
 
         <PreferenceCategory android:title="@string/settings_capacities" >
-            <com.grazerss.preference.ListPreference
+            <com.grazeten.preference.ListPreference
                 android:defaultValue="100"
                 android:entries="@array/storage_capacity_labels"
                 android:entryValues="@array/storage_capacity_values"
                 android:key="settings_entry_manager_entries_capacity"
                 android:summary="@string/settings_entry_manager_entries_capacity_summary"
                 android:title="@string/settings_entry_manager_entries_capacity_title" >
-            </com.grazerss.preference.ListPreference>
-            <com.grazerss.preference.ListPreference
+            </com.grazeten.preference.ListPreference>
+            <com.grazeten.preference.ListPreference
                 android:defaultValue="20"
                 android:entries="@array/keep_labels"
                 android:entryValues="@array/keep_values"
                 android:key="settings_keep_starred"
                 android:summary="@string/settings_keep_starred_summary"
                 android:title="@string/settings_keep_starred_title" />
-            <com.grazerss.preference.ListPreference
+            <com.grazeten.preference.ListPreference
                 android:defaultValue="5"
                 android:entries="@array/keep_labels"
                 android:entryValues="@array/keep_values"
                 android:key="settings_keep_shared"
                 android:summary="@string/settings_keep_shared_summary"
                 android:title="@string/settings_keep_shared_title" />
-            <com.grazerss.preference.ListPreference
+            <com.grazeten.preference.ListPreference
                 android:defaultValue="5"
                 android:entries="@array/keep_labels"
                 android:entryValues="@array/keep_values"
@@ -126,7 +126,7 @@
             android:summary="@string/settings_sync_in_progress_summary"
             android:title="@string/settings_sync_in_progress_title" />
 
-        <com.grazerss.preference.ListPreference
+        <com.grazeten.preference.ListPreference
             android:defaultValue="0"
             android:entries="@array/ui_mark_all_read_confirmation_threshold_labels"
             android:entryValues="@array/ui_mark_all_read_confirmation_threshold_values"
@@ -142,7 +142,7 @@
 			android:title="@string/settings_ui_theme_title"
 			android:defaultValue="Light" />
         -->
-        <com.grazerss.preference.ListPreference
+        <com.grazeten.preference.ListPreference
             android:defaultValue="top"
             android:entries="@array/settings_ui_action_bar_labels"
             android:entryValues="@array/settings_ui_action_bar_values"
@@ -193,7 +193,7 @@
             -->
         </PreferenceCategory>
         <PreferenceCategory android:title="@string/settings_webview" >
-            <com.grazerss.preference.ListPreference
+            <com.grazeten.preference.ListPreference
                 android:defaultValue="NORMAL"
                 android:entries="@array/text_size_labels"
                 android:entryValues="@array/text_size_values"
@@ -260,14 +260,14 @@
             android:title="@string/settings_notify_with_vibration_enabled_title" />
     </PreferenceScreen>
     <PreferenceScreen android:title="Work in Progress (Exper.)" >
-        <com.grazerss.preference.ListPreference
+        <com.grazeten.preference.ListPreference
             android:defaultValue="gwt"
             android:entries="@array/settings_mobilizer_labels"
             android:entryValues="@array/settings_mobilizer_values"
             android:key="settings_mobilizer"
             android:summary="The service that renders the simplified web pages."
             android:title="Mobilizer" />
-        <com.grazerss.preference.ListPreference
+        <com.grazeten.preference.ListPreference
             android:defaultValue="OFF"
             android:entries="@array/settings_plugins_labels"
             android:entryValues="@array/settings_plugins_values"
@@ -294,10 +294,10 @@
             android:title="Article Hardware Acceleration" />
     </PreferenceScreen>
 
-    <com.grazerss.preference.CheckBoxPreference
+    <com.grazeten.preference.CheckBoxPreference
         android:defaultValue="false"
         android:key="usage_data_permission_granted"
-        android:summary="Allow GrazeRSS to collect anonymous usage data."
+        android:summary="Allow GrazeTEN to collect anonymous usage data."
         android:title="Usage Data Collection" />
 
 </PreferenceScreen>

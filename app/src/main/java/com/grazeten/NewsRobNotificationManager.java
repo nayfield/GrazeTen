@@ -1,0 +1,368 @@
+package com.grazeten;
+
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.net.Uri;
+import android.view.View;
+import android.widget.RemoteViews;
+
+import com.grazeten.activities.ArticleListActivity;
+import com.grazeten.activities.UIHelper;
+import com.grazeten.jobs.Job;
+import com.grazeten.jobs.ModelUpdateResult;
+import com.grazeten.locale.FireReceiver;
+import com.grazeten.util.U;
+
+import java.util.Date;
+
+public class NewsRobNotificationManager implements IEntryModelUpdateListener
+{
+
+  static final int            NOTIFICATION_SYNCHRONIZATION_RUNNING                = 8;
+  static final int            NOTIFICATION_SYNCHRONIZATION_STOPPED_WITH_ERROR     = 1;
+  static final int            NOTIFICATION_SYNCHRONIZATION_STOPPED_SPACE_EXCEEDED = 2;
+  static final int            NOTIFICATION_NEW_ARTICLES                           = 2;
+
+  private NotificationManager nm;
+  private Context             context;
+
+  private boolean             displaysNotification;
+
+  NewsRobNotificationManager(Context context)
+  {
+    this.nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+    this.context = context.getApplicationContext();
+  }
+
+  public void cancelNewArticlesNotification()
+  {
+    nm.cancel(NOTIFICATION_NEW_ARTICLES);
+  }
+
+  void cancelSyncInProgressNotification()
+  {
+    nm.cancel(NOTIFICATION_SYNCHRONIZATION_RUNNING);
+    displaysNotification = false;
+    PL.log("NOTIFICATION: Running: unset", context);
+  }
+
+  public void cancelSyncProblemNotification()
+  {
+    nm.cancel(NOTIFICATION_SYNCHRONIZATION_STOPPED_WITH_ERROR);
+    nm.cancel(NOTIFICATION_SYNCHRONIZATION_STOPPED_SPACE_EXCEEDED);
+  }
+
+  public void createCheckReleaseNotesNotification(Uri uri)
+  {
+    Intent i = new Intent(Intent.ACTION_VIEW, uri);
+    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+//    Notification n = new Notification(R.drawable.gen_auto_notification_icon, "GrazeTEN has been updated", new Date().getTime());
+//    n.setLatestEventInfo(context, "GrazeTEN has been updated", "Tap to open release notes.", PendingIntent.getActivity(context, 0, i, 0));
+//    n.flags |= Notification.FLAG_AUTO_CANCEL;
+
+    Notification.Builder builder = new Notification.Builder(context)
+      .setSmallIcon(R.drawable.gen_auto_notification_icon)
+      .setTicker("GrazeTEN has been updated")
+      .setWhen(new Date().getTime())
+      .setContentTitle("GrazeTEN has been updated")
+      .setContentText("Tap to open release notes.")
+      .setContentIntent(PendingIntent.getActivity(context, 0, i, 0));
+    Notification n = builder.build();
+    n.flags |= Notification.FLAG_AUTO_CANCEL;
+    nm.notify(9292, n);
+  }
+
+  private Notification createSynchronizationProblemNotification(String captchaToken, String captchaUrl, boolean loginExpired)
+  {
+    BackendProvider grf = SyncInterfaceFactory.getSyncInterface(context);
+    Intent intent = new Intent().setClass(context, grf.getLoginClass());
+    intent.putExtra(EntryManager.EXTRA_LOGIN_EXPIRED, true);
+    if (captchaToken != null)
+    {
+      intent.putExtra(EntryManager.EXTRA_CAPTCHA_TOKEN, captchaToken);
+      intent.putExtra(EntryManager.EXTRA_CAPTCHA_URL, captchaUrl);
+    }
+    PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
+//    Notification n = new Notification(R.drawable.gen_auto_notification_sync_problem, U.t(context, R.string.login_to_google_needed),
+//        new Date().getTime());
+//    // Notification n = new Notification(R.drawable.sync_problem,
+//    // U.t(context,
+//    // R.string.login_to_google_needed), new Date().getTime());
+//    n.setLatestEventInfo(context, U.t(context, R.string.app_name), U.t(context, R.string.login_to_google_needed), pendingIntent); // LATER
+//    // i18n
+//    n.flags |= Notification.FLAG_AUTO_CANCEL;
+
+    Notification.Builder builder = new Notification.Builder(context)
+        .setSmallIcon(R.drawable.gen_auto_notification_sync_problem)
+        .setTicker(U.t(context, R.string.login_to_google_needed))
+        .setWhen(System.currentTimeMillis())
+        .setContentTitle(U.t(context, R.string.app_name))
+        .setContentText(U.t(context, R.string.login_to_google_needed))
+        .setContentIntent(pendingIntent);
+    Notification n = builder.build();
+    n.flags |= Notification.FLAG_AUTO_CANCEL;
+    return n;
+  }
+
+  private Notification createSynchronizationRunningNotification(boolean fastSyncOnly)
+  {
+
+//    Notification n = new Notification(R.drawable.gen_auto_notification_icon, context.getResources().getString(
+//        fastSyncOnly ? R.string.fast_synchronization_running_notification_title : R.string.synchronization_running_notification_title),
+//        new Date().getTime());
+    Intent intent = new Intent(context, DashboardListActivity.class);
+    intent.putExtra("showProgress", true);
+//
+//    n.setLatestEventInfo(context, U.t(context, fastSyncOnly ? R.string.fast_synchronization_running_notification_title
+//        : R.string.synchronization_running_notification_title), U.t(context,
+//        fastSyncOnly ? R.string.fast_synchronization_running_notification_summary : R.string.synchronization_running_notification_summary),
+//        PendingIntent.getActivity(context, 0, intent, 0));
+//    n.flags = Notification.FLAG_ONGOING_EVENT;
+
+    Notification.Builder builder = new Notification.Builder(context)
+        .setSmallIcon(R.drawable.gen_auto_notification_icon)
+        .setTicker(context.getResources().getString(
+            fastSyncOnly ? R.string.fast_synchronization_running_notification_title
+                         : R.string.synchronization_running_notification_title))
+        .setWhen(System.currentTimeMillis())
+        .setContentTitle(U.t(context, fastSyncOnly ? R.string.fast_synchronization_running_notification_title
+                                                   : R.string.synchronization_running_notification_title))
+        .setContentText(U.t(context, fastSyncOnly ? R.string.fast_synchronization_running_notification_summary
+                                                  : R.string.synchronization_running_notification_summary))
+        .setContentIntent(PendingIntent.getActivity(context, 0, intent, 0));
+    Notification n = builder.build();
+    n.flags = Notification.FLAG_ONGOING_EVENT;
+    return n;
+  }
+
+  Notification createSynchronizationRunningNotificationOld(boolean fastSyncOnly)
+  {
+
+    final EntryManager entryManager = EntryManager.getInstance(context);
+
+    final Notification n = new Notification(R.drawable.gen_auto_notification_icon, context.getResources().getString(
+        fastSyncOnly ? R.string.fast_synchronization_running_notification_title : R.string.synchronization_running_notification_title),
+        new Date().getTime());
+
+    n.flags = Notification.FLAG_ONGOING_EVENT;
+
+    final RemoteViews contentView = new RemoteViews(context.getPackageName(), R.layout.in_progress_notification);
+    n.contentView = contentView;
+
+    Intent cancelSyncIntent = new Intent("com.grazerss.CANCEL_SYNC");
+    // Intent cancelSyncIntent = new Intent();
+    cancelSyncIntent.setClass(context, FireReceiver.class);
+    PendingIntent pendingCancelSyncIntent = PendingIntent.getBroadcast(context, 0, cancelSyncIntent, 0);
+    contentView.setOnClickPendingIntent(R.id.cancel_sync, pendingCancelSyncIntent);
+
+    Intent showDashboardIntent = new Intent(context, DashboardListActivity.class);
+    PendingIntent showDashboardPendingIntent = PendingIntent.getActivity(context, 0, showDashboardIntent, 0);
+    n.contentIntent = pendingCancelSyncIntent;// showDashboardPendingIntent;
+
+    updateContentView(entryManager, contentView);
+
+    entryManager.addListener(new IEntryModelUpdateListener()
+    {
+
+      @Override
+      public void modelUpdated()
+      {
+
+      }
+
+      @Override
+      public void modelUpdated(String atomId)
+      {
+
+      }
+
+      @Override
+      public void modelUpdateFinished(ModelUpdateResult result)
+      {
+        entryManager.removeListener(this);
+      }
+
+      @Override
+      public void modelUpdateStarted(boolean fastSyncOnly)
+      {
+
+      }
+
+      @Override
+      public void statusUpdated()
+      {
+        updateContentView(entryManager, contentView);
+        nm.notify(NOTIFICATION_SYNCHRONIZATION_RUNNING, n);
+      }
+    });
+
+    return n;
+  }
+
+  public void createSyncSpaceExceededProblemNotification(int reservedSpaceInMB)
+  {
+    Intent intent = new Intent(context, DashboardListActivity.class);
+    PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
+    String message = "Not enough space left to download articles.\n<" + reservedSpaceInMB + " MB free.";
+//    Notification n = new Notification(R.drawable.gen_auto_notification_sync_problem, message, new Date().getTime());
+////     Notification n = new Notification(R.drawable.sync_problem,
+////     U.t(context,
+////     R.string.login_to_google_needed), new Date().getTime());
+//    n.setLatestEventInfo(context, U.t(context, R.string.app_name), message, pendingIntent);
+//    n.flags |= Notification.FLAG_AUTO_CANCEL;
+
+    Notification.Builder builder = new Notification.Builder(context)
+        .setSmallIcon(R.drawable.gen_auto_notification_sync_problem)
+        .setTicker(message)
+        .setWhen(System.currentTimeMillis())
+        .setContentTitle(U.t(context, R.string.app_name))
+        .setContentText(message)
+        .setContentIntent(pendingIntent);
+    Notification n = builder.build();
+    n.flags |= Notification.FLAG_AUTO_CANCEL;
+    nm.notify(NOTIFICATION_SYNCHRONIZATION_STOPPED_WITH_ERROR, n);
+  }
+
+  @Override
+  public void finalize()
+  {
+    if (displaysNotification)
+    {
+      PL.log("WTF? Notification wasn't cleared.", context);
+    }
+  }
+
+  public void modelUpdated()
+  {
+  }
+
+  public void modelUpdated(String atomId)
+  {
+  }
+
+  public void modelUpdateFinished(ModelUpdateResult result)
+  {
+    cancelSyncInProgressNotification();
+  }
+
+  public void modelUpdateStarted(boolean fastSyncOnly)
+  {
+    // clear old and error notifications
+    // cancelAllNotifications();
+    cancelSyncProblemNotification();
+
+    // set during notification
+    if (EntryManager.getInstance(context).isSyncInProgressNotificationEnabled())
+    {
+      sendSynchronizationRunningNotification(fastSyncOnly);
+    }
+  }
+
+  public void notifyNewArticles(EntryManager entryManager, long startDate, int noOfNewArticles)
+  {
+    cancelNewArticlesNotification();
+
+    if (noOfNewArticles < 1) {
+      return;
+    }
+    SharedPreferences prefs = entryManager.getSharedPreferences();
+    if (!prefs.getBoolean("settings_notifications_enabled", true)) {
+      return;
+    }
+
+    Intent intent = new Intent(context, ArticleListActivity.class);
+    DBQuery dbq = new DBQuery(entryManager, null, null);
+    dbq.setStartDate(startDate);
+    dbq.setShouldHideReadItemsWithoutUpdatingThePreference(true);
+    intent.putExtra(UIHelper.EXTRA_KEY_TITLE, "New Articles");
+    UIHelper.addExtrasFromDBQuery(intent, dbq);
+
+    PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
+//    Notification n = new Notification(R.drawable.gen_auto_notification_icon,
+//        noOfNewArticles + " new " + U.pluralize(noOfNewArticles, "article"), System.currentTimeMillis());
+//    n.setLatestEventInfo(context, "New articles!",
+//    noOfNewArticles + " new " + U.pluralize(noOfNewArticles, "article") + " in monitored feeds.", pendingIntent);
+
+    Notification.Builder builder = new Notification.Builder(context)
+      .setSmallIcon(R.drawable.gen_auto_notification_icon)
+      .setTicker(noOfNewArticles + " new " + U.pluralize(noOfNewArticles, "article"))
+      .setWhen(System.currentTimeMillis())
+      .setContentTitle("New articles!")
+      .setContentText(noOfNewArticles + " new " + U.pluralize(noOfNewArticles, "article") + " in monitored feeds.")
+      .setContentIntent(pendingIntent);
+    Notification n = builder.build();
+    n.number = noOfNewArticles;
+    n.flags |= Notification.FLAG_AUTO_CANCEL;
+
+    if (prefs.getBoolean("settings_notify_with_led_enabled", true)) {
+      n.ledOnMS = 100;
+      n.ledOffMS = 3000;
+      n.ledARGB = 0xff0000ff;
+      n.flags |= Notification.FLAG_SHOW_LIGHTS;
+    }
+
+    // if (prefs.getBoolean("settings_notify_with_sound_enabled", false))
+    // n.defaults |= Notification.DEFAULT_SOUND;
+
+    if (prefs.getString("settings_notify_with_sound_url", "").length() != 0) {
+      n.sound = Uri.parse(prefs.getString("settings_notify_with_sound_url", ""));
+    }
+    if (prefs.getBoolean("settings_notify_with_vibration_enabled", true)) {
+      n.vibrate = new long[] { 0, 100, 1000, 100, 1000, 100 };
+    }
+
+    nm.notify(NOTIFICATION_NEW_ARTICLES, n);
+  }
+
+  public void sendSynchronizationProblemNotification(boolean loginExpired)
+  {
+    nm.notify(NOTIFICATION_SYNCHRONIZATION_STOPPED_WITH_ERROR, createSynchronizationProblemNotification(null, null, loginExpired));
+  }
+
+  private void sendSynchronizationRunningNotification(boolean fastSyncOnly)
+  {
+
+    nm.notify(NOTIFICATION_SYNCHRONIZATION_RUNNING, createSynchronizationRunningNotification(fastSyncOnly));
+    displaysNotification = true;
+    PL.log("NOTIFICATION: Running: set", context);
+  }
+
+  public void statusUpdated()
+  {
+
+  }
+
+  private void updateContentView(EntryManager entryManager, RemoteViews remoteViews)
+  {
+    String status = "...";
+    Job runningJob = entryManager.getCurrentRunningJob();
+    if (runningJob != null)
+    {
+      status = runningJob.getJobDescription();
+      if (runningJob.isProgressMeassurable())
+      {
+        int[] progress = runningJob.getProgress();
+        int currentArticle = progress[0];
+        int allArticles = progress[1];
+        remoteViews.setProgressBar(R.id.progress_bar, allArticles, currentArticle, false);
+        status = runningJob.getJobDescription() + " (" + currentArticle + "/" + allArticles + ")" + ".";
+      }
+      else
+      {
+        remoteViews.setProgressBar(R.id.progress_bar, 0, 0, true);
+      }
+
+    }
+    else
+    {
+      remoteViews.setProgressBar(R.id.progress_bar, 0, 0, true);
+    }
+    remoteViews.setViewVisibility(R.id.cancel_sync, entryManager.isCancelRequested() ? View.GONE : View.VISIBLE);
+    remoteViews.setTextViewText(R.id.status_text, status);
+  }
+}

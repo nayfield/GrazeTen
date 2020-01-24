@@ -2,7 +2,7 @@ package com.newsblur.network;
 
 import android.content.Context;
 
-import com.grazerss.NewsRob;
+import com.grazeten.NewsRob;
 import com.newsblur.network.domain.FeedFolderResponse;
 import com.newsblur.network.domain.LoginResponse;
 

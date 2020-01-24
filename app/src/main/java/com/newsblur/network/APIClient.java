@@ -16,7 +16,7 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.grazerss.PL;
+import com.grazeten.PL;
 import com.newsblur.domain.ValueMultimap;
 import com.newsblur.util.NetworkUtils;
 
