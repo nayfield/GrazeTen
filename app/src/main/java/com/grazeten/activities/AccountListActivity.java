@@ -1,18 +1,19 @@
 package com.grazeten.activities;
 
-import java.io.IOException;
-
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager.BadTokenException;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.grazeten.BackendProvider;
@@ -23,6 +24,8 @@ import com.grazeten.auth.IAccountManagementUtils;
 import com.grazeten.auth.IAuthenticationCallback;
 import com.grazeten.util.SDK9Helper;
 import com.grazeten.util.U;
+
+import java.io.IOException;
 
 public class AccountListActivity extends ListActivity
 {
@@ -114,37 +117,41 @@ public class AccountListActivity extends ListActivity
 
   protected void onError(Exception ex)
   {
-
-    final AlertDialog dialog = new AlertDialog.Builder(this).create();
-    dialog.setIcon(android.R.drawable.ic_dialog_alert);
-    dialog.setButton("OK", new DialogInterface.OnClickListener()
-    {
-
-      public void onClick(DialogInterface dialog, int which)
-      {
-        dialog.dismiss();
-      }
-
-    }); // i18n
-    dialog.setTitle(U.t(this, R.string.login_error_dialog_title));
-
-    String message = null;
-    if (ex instanceof IOException)
-    {
+    String message;
+    if (ex instanceof IOException) {
       message = "Could not reach the Google server. Are you online?";
     }
-    else
-    {
+    else {
       message = U.t(this, R.string.login_error_dialog_message) + " " + ex.getMessage();
     }
-    dialog.setMessage(message); // i18n
-    try
-    {
+    AlertDialog.Builder builder = new AlertDialog.Builder(this)
+        .setTitle(U.t(this, R.string.login_error_dialog_title))
+        .setMessage(message)
+        .setIcon(android.R.drawable.ic_dialog_alert)
+        .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+          @Override
+          public void onClick(DialogInterface dialog, int which) {
+            dialog.cancel();
+          }
+        });
+    final AlertDialog dialog = builder.create();
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+      dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+        @Override
+        public void onShow(DialogInterface d)
+        {
+          Button posButton = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
+          LinearLayout.LayoutParams posParams = (LinearLayout.LayoutParams) posButton.getLayoutParams();
+          posParams.weight = 1;
+          posParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
+          posButton.setLayoutParams(posParams);
+        }
+      });
+    }
+    try {
       dialog.show();
     }
-    catch (BadTokenException e)
-    {
-      //
+    catch (BadTokenException e) {
     }
   }
 

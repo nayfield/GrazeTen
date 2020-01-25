@@ -1,13 +1,11 @@
 package com.grazeten.activities;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.Html;
@@ -15,6 +13,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.view.WindowManager.BadTokenException;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -22,6 +21,7 @@ import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -32,6 +32,9 @@ import com.grazeten.SyncInterfaceFactory;
 import com.grazeten.auth.AccountManagementUtils;
 import com.grazeten.auth.IAccountManagementUtils;
 import com.grazeten.util.U;
+
+import java.util.ArrayList;
+import java.util.Collection;
 
 public class LoginActivity extends Activity implements OnClickListener
 {
@@ -317,28 +320,35 @@ public class LoginActivity extends Activity implements OnClickListener
     }
     configureView(null, null);
 
-    final AlertDialog dialog = new AlertDialog.Builder(LoginActivity.this).create();
-    dialog.setIcon(android.R.drawable.ic_dialog_alert);
-    dialog.setButton("OK", new DialogInterface.OnClickListener()
-    {
-
-      public void onClick(DialogInterface dialog, int which)
-      {
-        dialog.dismiss();
-      }
-
-    }); // i18n
-    dialog.setTitle(U.t(LoginActivity.this, R.string.login_error_dialog_title));
-    dialog.setMessage(U.t(LoginActivity.this, R.string.login_error_dialog_message) + " " + ex.getMessage() + "/n(" + ex.getClass() + ")"); // i18n
-    try
-    {
+    AlertDialog.Builder builder = new AlertDialog.Builder(this)
+        .setTitle(U.t(LoginActivity.this, R.string.login_error_dialog_title))
+        .setMessage(U.t(LoginActivity.this, R.string.login_error_dialog_message) + " " + ex.getMessage() + "/n(" + ex.getClass() + ")")
+        .setIcon(android.R.drawable.ic_dialog_alert)
+        .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+          @Override
+          public void onClick(DialogInterface dialog, int which) {
+            dialog.cancel();
+          }
+        });
+    final AlertDialog dialog = builder.create();
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+      dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+        @Override
+        public void onShow(DialogInterface d)
+        {
+          Button posButton = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
+          LinearLayout.LayoutParams posParams = (LinearLayout.LayoutParams) posButton.getLayoutParams();
+          posParams.weight = 1;
+          posParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
+          posButton.setLayoutParams(posParams);
+        }
+      });
+    }
+    try {
       dialog.show();
     }
-    catch (BadTokenException e)
-    {
-      //
+    catch (BadTokenException e) {
     }
-    // mUsername.setError(getString(R.string.screen_login_error));
   }
 
   @Override

@@ -11,6 +11,7 @@ import android.content.res.Configuration;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -20,11 +21,13 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AbsoluteLayout;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.CursorAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -298,12 +301,10 @@ public abstract class AbstractNewsRobListActivity extends ListActivity
     dbq.setShouldHideReadItemsWithoutUpdatingThePreference(true);
 
     final long noOfArticlesMarkedAsRead = getEntryManager().getMarkAllReadCount(dbq);
-
     final Runnable action = new Runnable()
     {
       public void run()
       {
-
         Toast.makeText(AbstractNewsRobListActivity.this,
             noOfArticlesMarkedAsRead + " article" + (noOfArticlesMarkedAsRead > 1 ? "s" : "") + " marked as read.", Toast.LENGTH_LONG).show();
         if (getEntryManager().shouldHideReadItems())
@@ -314,16 +315,12 @@ public abstract class AbstractNewsRobListActivity extends ListActivity
       }
     };
 
-    if (noOfArticlesMarkedAsRead >= getEntryManager().getMarkAllReadConfirmationDialogThreshold())
-    {
-
+    if (noOfArticlesMarkedAsRead >= getEntryManager().getMarkAllReadConfirmationDialogThreshold()) {
       boolean pl = noOfArticlesMarkedAsRead > 1;
       String message = "Mark " + (pl ? "all " : "") + noOfArticlesMarkedAsRead + " article" + (pl ? "s" : "") + " read?";
-
       showConfirmationDialog(message, action);
     }
-    else
-    {
+    else {
       action.run();
     }
   }
@@ -741,100 +738,16 @@ public abstract class AbstractNewsRobListActivity extends ListActivity
         return true;
       case R.id.menu_logout:
         showConfirmationDialog("Logout and Clear Cache?", new Runnable() {
-            public void run() {
-                Log.d(TAG, "Logging out ...");
-                getEntryManager().logout();
-                getEntryManager().requestClearCache(handler);
-            }
+          public void run() {
+            Log.d(TAG, "Logging out ...");
+            getEntryManager().logout();
+            getEntryManager().requestClearCache(handler);
+          }
         });
         return true;
       default:
         return super.onOptionsItemSelected(item);
-
-//      case MENU_ITEM_SETTINGS_ID:
-//        if (false) {
-//          Intent intent = new Intent();
-//
-//          intent.setClassName("com.grazeten", "com.grazeten.activities.ArticleListActivity");
-//
-//          intent.putExtra("FEED_URL", "xxx"); // http://www.spiegel.de/schlagzeilen/index.rss
-//
-//          startActivity(intent);
-//          return true;
-//        }
-//        else {
-//          Intent i = new Intent().setClass(this, SettingsActivity.class);
-//          this.startActivity(i);
-//          return true;
-//        }
-//
-//      case MENU_ITEM_CLEAR_CACHE_ID:
-//        showConfirmationDialog("Clear the Cache?", new Runnable()
-//        {
-//
-//          @Override
-//          public void run()
-//          {
-//            getEntryManager().requestClearCache(handler);
-//          }
-//        });
-//
-//        return true;
-//
-//      case MENU_ITEM_LOGOUT_ID:
-//        // final ProgressDialog dialog2 = ProgressDialog.show(this,
-//        // U.t(this,
-//        // R.string.logout_and_clear_cache_dialog_title), U.t(this,
-//        // R.string.logout_and_clear_cache_dialog_message), true);
-//
-//        showConfirmationDialog("Logout and Clear Cache?", new Runnable()
-//        {
-//
-//          public void run()
-//          {
-//            Log.d(TAG, "Logging out ...");
-//            getEntryManager().logout();
-//            getEntryManager().requestClearCache(handler);
-//            // dialog2.dismiss();
-//          }
-//        });
-//        return true;
-
-//      case MENU_ITEM_HIDE_ID:
-//        requestToggleHideItems();
-//        return true;
-//
-//      case MENU_ITEM_REFRESH_ID:
-//        requestRefresh();
-//        return true;
-
-//      case MENU_ITEM_CANCEL_ID:
-//        getEntryManager().cancel();
-//        return true;
-
-//      case MENU_ITEM_MARK_ALL_READ_ID:
-//        instantiateMarkAllReadDialog();
-//        return true;
-
-//      case MENU_ITEM_TOGGLE_THEME_ID:
-//        getEntryManager().toggleTheme();
-//        reopenIfThemeOrActionBarLocationChanged();
-//        return true;
-
-      case MENU_ITEM_SORT_ID:
-        requestToggleSortOrder();
-        return true;
-
-//      case MENU_ITEM_SEARCH_ID:
-//        onSearchRequested();
-//        return true;
-//
-//      case MENU_ITEM_SHOW_FILTER_ID:
-//        showDialog(DIALOG_SHOW_FILTER_INFO_ID);
-//        return true;
     }
-
-//    return super.onOptionsItemSelected(item);
   }
 
   @Override
@@ -1214,29 +1127,41 @@ public abstract class AbstractNewsRobListActivity extends ListActivity
 
   void showConfirmationDialog(String message, final Runnable action)
   {
-    AlertDialog dialog = new AlertDialog(this)
-    {
-    };
-
-    dialog.setMessage(message);
-
-    dialog.setButton(getResources().getString(android.R.string.ok), new DialogInterface.OnClickListener()
-    {
-      public void onClick(DialogInterface dialog, int which)
-      {
-        action.run();
-      }
-
-    });
-    dialog.setButton2(getResources().getString(android.R.string.cancel), new DialogInterface.OnClickListener()
-    {
-      public void onClick(DialogInterface dialog, int which)
-      {
-      }
-    });
-    dialog.setTitle("Please Confirm!");
-    dialog.setIcon(android.R.drawable.ic_dialog_alert);
-
+    AlertDialog.Builder builder = new AlertDialog.Builder(this)
+        .setTitle("Please Confirm!")
+        .setMessage(message)
+        .setIcon(android.R.drawable.ic_dialog_alert)
+        .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+          @Override
+          public void onClick(DialogInterface dialog, int which) {
+            action.run();
+          }
+        })
+        .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+          @Override
+          public void onClick(DialogInterface dialog, int which) {
+            dialog.cancel();
+          }
+        });
+    final AlertDialog dialog = builder.create();
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+      dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+        @Override
+        public void onShow(DialogInterface d)
+        {
+          Button posButton = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
+          Button negButton = dialog.getButton(DialogInterface.BUTTON_NEGATIVE);
+          LinearLayout.LayoutParams posParams = (LinearLayout.LayoutParams) posButton.getLayoutParams();
+          posParams.weight = 1;
+          posParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
+          LinearLayout.LayoutParams negParams = (LinearLayout.LayoutParams) negButton.getLayoutParams();
+          negParams.weight = 1;
+          negParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
+          posButton.setLayoutParams(posParams);
+          negButton.setLayoutParams(negParams);
+        }
+      });
+    }
     dialog.show();
   }
 
