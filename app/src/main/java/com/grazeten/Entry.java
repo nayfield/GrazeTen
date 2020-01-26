@@ -103,7 +103,7 @@ public class Entry
     this.id = id;
 
     mobilizersMap.put("instapaper", "http://www.instapaper.com/m?u=");
-    mobilizersMap.put("gwt", "http://www.google.com/gwt/n?u=");
+    mobilizersMap.put("gwt", "https://googleweblight.com/?lite_url=");
     mobilizersMap.put("readability", "https://www.readability.com/read?url=");
   }
 
