@@ -1,5 +1,8 @@
 # GrazeTEN - GrazeRSS targeting Android 10
 
+![Play Store Logo](https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png)
+
+## [Link to Play Store](https://play.google.com/store/apps/details?id=com.grazeten)
 
 * This is the GrazeTEN source repository.
 * GrazeTEN is based on GrazeRSS, without which GrazeTEN would not exist.
