@@ -1,7 +1,7 @@
 # GrazeTEN - GrazeRSS targeting Android 10
 
 
-This will no longer work on current android phones, see [Graze17|https://github.com/EDIflyer/Graze17] for a port to newer api.
+This will no longer work on current android phones, see [Graze17](https://github.com/EDIflyer/Graze17) for a port to newer api.
 
 
 
