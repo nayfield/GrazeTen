@@ -3,6 +3,7 @@
 
 This will no longer work on current android phones, see [Graze17](https://github.com/EDIflyer/Graze17) for a port to newer api.
 
+---
 
 
 * This is the GrazeTEN source repository.
@@ -31,10 +32,5 @@ providers other than NewsBlur.
 
 ## Source code and reporting issues
 
-The project accepts issue reports [here](https://github.com/nayfield/GrazeTen/issues) .  However,
-you are much more likely to get an issue fixed by providing mergeable pull requests.
-
-
-The source code for GrazeTEN is [here](https://github.com/nayfield/GrazeTen).
-
+Try Graze17
 
